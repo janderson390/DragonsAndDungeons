@@ -23,6 +23,22 @@
 - Media Queries
 */
 
+
+
+.display {
+  height: 400px;
+  margin: 1em;
+  border-style: groove;
+  border: 1px solid #D1D1D1;
+  border-radius: 4px;
+  padding: 4px;
+  display: table-cell;
+  vertical-align: bottom;
+}
+
+.input {
+  margin-top: 1em;
+}
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .container {
