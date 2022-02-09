@@ -1,6 +1,6 @@
 function main() {
     let usrInput = document.querySelector("#usrInput");
-    let usrOutput = document.querySelector(".display p");
+    let usrOutput = document.querySelector(".displayTxt p");
     let stats = document.querySelectorAll('.stats');
     let text = {
         text1:"You awaken in a dust-covered cell, surrounded by skeletons in shackles. ",
