@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dragons & Dungeons</title>
+    <meta name="description" content="A text-based adventure game">
+    <meta name="author" content="The Agile Team">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href = "css/stylesheet.css">
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+  </head>
+
+  <body>
+
+    <!-- Primary Page Layout
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="wrapper">
+      <div class="container">
+        <h1>Dragons & Dungeons</h1>
+
+        <div class="test">
+          <div class="display"><p></p></div>  
+          <div class="charInfo">
+            <h4>Character Info</h4>
+            <p>Strength: <span class="stats"></span></p>
+            <p>Dexterity: <span class="stats"></span></p>
+            <p>Constitution: <span class="stats"></span></p>
+            <div id="location">Text</div> 
+            <div id="option-buttons" class="btn-grid">
+              <button class="btn">Option 1</button>
+              <button class="btn">Option 2</button>
+              <button class="btn">Option 3</button>
+              <button class="btn">Option 4</button>
+          </div>  
+          </div>  
+          
+
+
+        </div>
+
+        <form onSubmit="return false;">
+          <input type="text" id="usrInput"/>
+        </form>
+      </div> 
+    </div>
+
+    <!-- End Document
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
