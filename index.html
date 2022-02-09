@@ -1,65 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dragons & Dungeons</title>
+    <meta name="description" content="A text-based adventure game">
+    <meta name="author" content="The Agile Team">
 
-<head>
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Dragons & Dungeons</title>
-  <meta name="description" content="A text-based adventure game">
-  <meta name="author" content="The Agile Team">
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href = "css/stylesheet.css">
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+  </head>
 
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <body>
 
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href = "css/styles.css">
+    <!-- Primary Page Layout
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="wrapper">
+      <div class="container">
+        <h1>Dragons & Dungeons</h1>
 
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-
-</head>
-
-<body>
-
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <h1>Dragons & Dungeons</h1>
-    <div class="row">
-      <div class="seven columns u-pull-left">
-        <div class="display">You awaken in a dust-covered cell, surrounded by skeletons in shackles.</div>
-        <div class="input">
-          <form action="enter" method="post">
-            <p><input type="text" style="width: 100%;" /></p>
-          </form>
+        <div class="test">
+          <div class="display"><p></p></div>  
+          <div class="charInfo">
+            <h4>Character Info</h4>
+            <p>Strength: <span class="stats"></span></p>
+            <p>Dexterity: <span class="stats"></span></p>
+            <p>Constitution: <span class="stats"></span></p>
+          </div>      
         </div>
-      </div>
-      <div class="five columns u-pull-right">
-        <h4>Character Info</h4>
-        <p>Strength: 10</p>
-        <p>Dexterity: 14</p>
-        <p>Constitution: 13</p>
-      </div>
+
+        <form onSubmit="return false;">
+          <input type="text" id="usrInput"/>
+        </form>
+      </div> 
     </div>
-  </div>
 
-  <!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="js/script.js"></script>
-</body>
-
+    <!-- End Document
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script src="js/script.js"></script>
+  </body>
 </html>
