@@ -84,6 +84,16 @@ input {
   font-size: 1rem;
 }
 
+.inventory {
+  position: absolute;
+  width: 39.33%;
+  margin-left: 56.3333333333%;
+  margin-top: -10.7rem;
+  float: right;
+  font-size: 1rem;
+  border: 1px solid #222;
+  border-radius: 4px;
+}
 
 /* Phones*/
 @media (max-width: 500px) {
@@ -109,6 +119,12 @@ input {
   .charInfo {
     float: none;
     margin: 4rem 25%;
+    text-align: center;
+  }
+
+  .inventory {
+    float: none;
+    margin: 20rem 25%;
     text-align: center;
   }
 }
