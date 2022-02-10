@@ -1,16 +1,14 @@
 // This is called from main.js
-function parseStart() {
+
+function parserStart() {
     // This is used to focus on the textbox whenever the website fully loads.
     usrInput.focus();
 
-    // Description of the first room will go here
-    usrOutput.append("You awaken in a dust-covered cell, surrounded by skeletons in shackles.");
-
     // Listen to the text input
-    // This event listener is fired when the user presses enter
     usrInput.addEventListener("keyup", function(event) {
         event.preventDefault();
 
+        // Actually does stuff when user presses enter key
         if (event.keyCode === 13) {
             // Read user input
             var input = usrInput.value.toLowerCase();

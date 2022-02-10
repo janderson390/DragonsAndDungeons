@@ -6,6 +6,12 @@ function runCommand(command, request) {
     usrOutput.append(document.createElement("br"));
 
     switch (command) {
+        case "move":
+        case "go":
+        case "walk":
+            moveTo(request);
+            break;
+
         case "take":
         case "grab":
             take(request);
@@ -20,19 +26,43 @@ function runCommand(command, request) {
         case "consume":
             consume(request);
             break;
+        
+        case "attack":
+            attack(request);
+            break;
 
         case "flee":
         case "run":
             flee(request);
             break;
 
+        case "observe":
+        case "look":
+            observe();
+            break;
+
         case "help":
             displayHelp();
+            break;
+
+        case "clearoutput":
+            clearOutput();
             break;
 
         default:
             displayError();
     }
+}
+
+function moveTo(request) {
+    // note: request will prob be cardinal directions
+    if (request === "") {
+        usrOutput.append("You didn't specify a direction.");
+    } else {
+        usrOutput.append("You moved " + request + ".");
+    }
+
+    // TODO: move locations
 }
 
 function take(request) {
@@ -60,7 +90,7 @@ function consume(request) {
     if (request === "") {
         usrOutput.append("You didn't eat/drink anything.");
     } else {
-        usrOutput.append("You ate/drank the " + request);
+        usrOutput.append("You ate/drank the " + request + ".");
     }
 
     // TODO: compare request to items in the inventory, remove from inventory
@@ -68,25 +98,56 @@ function consume(request) {
     // liquids and solids, tbd
 }
 
+function attack(request) {
+    if (request === "") {
+        usrOutput.append("You didn't target anything.");
+    } else {
+        usrOutput.append("You attacked the " + request + ".");
+    }
+
+    // TODO: hmmmm
+}
+
 function flee() {
     usrOutput.append("You fleed from battle!");
+
+    // TODO: Go back to previous room
 }
+
+function observe() {
+    usrOutput.append("You observe your surroundings.");
+
+    // TODO: grab description from the room and put it here
+}
+
+var commands = [
+    "move",
+    "take, grab",
+    "drop",
+    "eat, drink, consume",
+    "attack",
+    "flee, run",
+    "observe, look",
+    "help",
+    "clearoutput"
+]
 
 // golly this is UGLY but it works for now
 function displayHelp() {
     helpCount = 0;
     usrOutput.append(document.createElement("br"));
-    usrOutput.append("List of commands available now:");
+    usrOutput.append("List of commands available:");
     usrOutput.append(document.createElement("br"));
     usrOutput.append("*separated by comma means they do the same thing*");
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("take, grab");
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("drop");
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("flee, run");
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("help");
+
+    for (let i = 0; i < commands.length; i++) {
+        usrOutput.append(document.createElement("br"));
+        usrOutput.append(commands[i]);
+    }
+}
+
+function clearOutput() {
+    usrOutput.innerHTML = "";
 }
 
 var errorMsgs = [
