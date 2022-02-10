@@ -103,6 +103,7 @@ input {
 
 .inventory table, .charInfo > p{
   margin-left: 1rem;
+  font-size: 1rem;
 }
 
 /* Phones*/
@@ -134,17 +135,20 @@ input {
 
   .inventory {
     float: none;
-    margin: 28rem 25%;
+    margin: 22.5rem 25%;
     text-align: center;
   }
 
   .charInfo > h4, .inventory > h4 {
     text-align: center;
     font-size: 22px;
+    margin-bottom: .5rem;
   }
 
   .inventory table, .charInfo > p{
     text-align: center;
+    width: 6.5rem;
+    font-size: 14px;
   }
   
 }
