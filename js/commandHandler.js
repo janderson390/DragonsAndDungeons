@@ -132,7 +132,6 @@ var commands = [
     "clearoutput"
 ]
 
-// golly this is UGLY but it works for now
 function displayHelp() {
     helpCount = 0;
     usrOutput.append(document.createElement("br"));
