@@ -24,6 +24,34 @@
 <body>
 <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<!-- character creation div that will vanish upon character creation -->
+<div id="createCharacterDiv">
+
+    <form id="createCharacterForm">
+        <h1>Create Character:</h1>
+        <input type="text" id="enteredName" placeholder="Name">
+
+        <div class="formContainer">
+            <label class="formGroup" for="fighter">Fighter</label>
+            <input type="radio" id="fighter" name="chosenClass" value="fighter">
+        </div>
+
+        <div class="formContainer">
+            <label class="formGroup" for="ranger">Ranger</label>
+            <input type="radio" id="ranger" name="chosenClass" value="ranger">
+        </div>
+
+        <div class="formContainer">
+            <label class="formGroup" for="brute">Brute</label>
+            <input type="radio" id="brute" name="chosenClass" value="brute">
+        </div>   
+
+        <input type="submit" value="Create Character" id="submitCharacter">
+    </form>
+
+</div>
+
 <div class="wrapper">
     <div class="container">
         <h1>Trials of Grumb</h1>
@@ -50,7 +78,7 @@
             </div>
         </div>
 
-        <form onSubmit="return false;" autocomplete="off">
+        <form onSubmit="return false;" autocomplete="off" id="commandForm">
             <input type="text" id="usrInput"/>
         </form>
         <p>Type "help" for list of commands</p>
