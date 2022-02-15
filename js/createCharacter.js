@@ -1,7 +1,4 @@
 
-// let createCharacterDiv = document.getElementById('createCharacterDiv');
-// let createCharacterForm = document.getElementById('createCharacterForm');
-
 let characterClass = {
     Fighter: {
         atk: 12, dex: 10, con: 10
@@ -24,10 +21,12 @@ class Character {
     }
 }
 
-
 function createCharacterScreen() {
     // Selects the first class
     classes[0].checked = true;
+    // Hides the div containing the main display
+    divContainer.style.opacity = 0;
+
 
     var validated = false;
 
@@ -41,14 +40,13 @@ function createCharacterScreen() {
         if (usrName.value === "") {
             errorMsg.innerHTML = "Please enter your name";
 
-            validated = false;
         } else if (usrName.value.length > 13) {
             errorMsg.innerHTML = "Name must be less than 13 characters";
 
-            validated = false;
         } else {
             charInfoName.innerHTML = usrName.value;
             createCharacterDiv.style.display = "none";
+            divContainer.style.opacity = 1;
 
             validated = true;
         }

@@ -71,7 +71,7 @@ h4 {
   width: 99%;
   border: 1px solid #D1D1D1;
   border-radius: 4px;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
   height: 2rem;
 }
 
@@ -175,7 +175,8 @@ h4 {
 
 #submitCharacter {
   margin-top: 4rem;
-  width: 10rem;
+  margin-right: 10%;
+  width: 8rem;
   height: 3rem;
   float: right;
   background-color: transparent;
@@ -193,6 +194,7 @@ h4 {
   .charInfo h4, .inventory h4 {
     font-size: 32px;
   }
+
 }
 
 @media (max-width: 500px) {
