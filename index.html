@@ -25,32 +25,7 @@
 <!-- Primary Page Layout
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-<!-- character creation div that will vanish upon character creation -->
-<div id="createCharacterDiv">
 
-    <form id="createCharacterForm">
-        <h1>Create Character:</h1>
-        <input type="text" id="enteredName" placeholder="Name">
-
-        <div class="formContainer">
-            <label class="formGroup" for="fighter">Fighter</label>
-            <input type="radio" id="fighter" name="chosenClass" value="fighter">
-        </div>
-
-        <div class="formContainer">
-            <label class="formGroup" for="ranger">Ranger</label>
-            <input type="radio" id="ranger" name="chosenClass" value="ranger">
-        </div>
-
-        <div class="formContainer">
-            <label class="formGroup" for="brute">Brute</label>
-            <input type="radio" id="brute" name="chosenClass" value="brute">
-        </div>   
-
-        <input type="submit" value="Create Character" id="submitCharacter">
-    </form>
-
-</div>
 
 <div class="wrapper">
     <div class="container">
@@ -61,6 +36,8 @@
 
             <div class="charInfo">
                 <h4>Character Info</h4>
+                <p>Name: <span class="charInfoName"></span></p>
+                <p>Class: <span class="charInfoClass"></span></p>
                 <p>Strength: <span class="stats"></span></p>
                 <p>Dexterity: <span class="stats"></span></p>
                 <p>Constitution: <span class="stats"></span></p>
@@ -83,6 +60,30 @@
         </form>
         <p>Type "help" for list of commands</p>
     </div> 
+
+    <!-- character creation div that will vanish upon character creation -->
+    <div id="createCharacterDiv">
+        <form id="createCharacterForm" autocomplete="off">
+            <h1>Create Character:</h1>
+            <label for="usrName">Name: </label>
+            <input type="text" class="usrName" >
+            <span class="errorMsg"></span>
+
+            <div class="formContainer">
+                <input type="radio" id="fighter" name="chosenClass" value="fighter">
+                <label class="formGroup" for="fighter">Fighter</label>
+                
+                <input type="radio" id="ranger" name="chosenClass" value="ranger">
+                <label class="formGroup" for="ranger">Ranger</label>
+                
+
+                <input type="radio" id="brute" name="chosenClass" value="brute">
+                <label class="formGroup" for="brute">Brute</label>
+            </div>
+            <input type="submit" value="Create" id="submitCharacter">           
+        </form>
+
+    </div>
 </div>
 
 <!-- End Document

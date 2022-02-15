@@ -1,6 +1,6 @@
 
-let createCharacterDiv = document.getElementById('createCharacterDiv');
-let createCharacterForm = document.getElementById('createCharacterForm');
+// let createCharacterDiv = document.getElementById('createCharacterDiv');
+// let createCharacterForm = document.getElementById('createCharacterForm');
 
 let characterClass = {
     Fighter: {
@@ -24,10 +24,10 @@ class Character {
     }
 }
 
-createCharacterForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    createCharacterDiv.style.display = "none";
-});
+// createCharacterForm.addEventListener('submit', function (event) {
+//     event.preventDefault();
+//     createCharacterDiv.style.display = "none";
+// });
 
 // very temp
 function createCharacter(name, className) {
@@ -44,3 +44,5 @@ function createCharacter(name, className) {
     usrOutput.append("CON: " + GAME.character.con);
     usrOutput.append(document.createElement("br"));
 }
+
+

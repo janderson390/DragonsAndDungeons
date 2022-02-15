@@ -3,12 +3,12 @@
 
 function main() {
     // INTRO (character creation, etc.)
-    createCharacter("Player1", "Fighter");
+    createCharacter(charInfoName, classes);
 
     // temp
-    stats[0].innerHTML = GAME.character.atk;
-    stats[1].innerHTML = GAME.character.dex;
-    stats[2].innerHTML = GAME.character.con;
+    // stats[0].innerHTML = GAME.character.atk;
+    // stats[1].innerHTML = GAME.character.dex;
+    // stats[2].innerHTML = GAME.character.con;
 
     // SETUP GAME (level/rooms, etc.)
     // Description of the first room will go here
@@ -23,4 +23,4 @@ function main() {
 }
 
 
-window.onload = main;
+//window.onload = main;
