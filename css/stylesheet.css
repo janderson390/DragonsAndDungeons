@@ -90,7 +90,7 @@ h4 {
   position: absolute;
   width: 39.33%;
   margin-left: 56.3333333333%;
-  margin-top: -10.7rem;
+  margin-top: -5.8rem;
   float: right;
   font-size: 1rem;
   border: 1px solid #D1D1D1;
@@ -125,22 +125,47 @@ h4 {
   width: 100%;
 }
 
-.formContainer {
-  width: 80%;
-  height: auto;
+#createCharacterForm input[type="text"] {
+  border: none;
+  height: 2.8rem;
+  font-size: 2.2rem;
+  border-bottom: 1px solid #222;
+  width: 40%;
+  outline: none;
 }
+
+#createCharacterForm input[type="text"]:focus {
+  border-bottom: 2px solid #222;
+}
+
 
 .formContainer label {
-  font-size: 2rem;
+  width: 10.5%;
+  font-size: 1.8rem;
+  display: block;
 }
 
-.formContainer input {
+.formContainer input[type="radio"] {
   border: 0px;
-  width: 1.75rem;
+  width: 0;
   height: 3rem;
   position: relative;
   top: .65rem;
+  opacity: 0;
+  
 }
+
+.formContainer label:hover{
+  border-bottom: 1px solid #222;
+  font-size: 38px;
+}
+
+.formContainer input[type="radio"]:checked + label {
+  border-bottom: 2px solid #222;
+  font-size: 2.4rem;
+  font-weight: 800;
+}
+
 
 #enteredName {
   width: 15rem;
@@ -149,13 +174,27 @@ h4 {
 }
 
 #submitCharacter {
-  margin-top: 1rem;
+  margin-top: 4rem;
   width: 10rem;
   height: 3rem;
+  float: right;
+  background-color: transparent;
+  border: none;
+  font-size: 1.8rem;
 }
 
+#submitCharacter:hover {
+  border-bottom: 1px solid #222;
+  font-size: 38px;
+}
 
-/* Phones*/
+/* Mobile */
+@media (max-width: 570PX) {
+  .charInfo h4, .inventory h4 {
+    font-size: 32px;
+  }
+}
+
 @media (max-width: 500px) {
 
   .wrapper {
@@ -184,7 +223,7 @@ h4 {
 
   .inventory {
     float: none;
-    margin: 22.5rem 25%;
+    margin: 24.5rem 25%;
     text-align: center;
   }
 

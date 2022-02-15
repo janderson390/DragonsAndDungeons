@@ -1,6 +1,6 @@
 
-let createCharacterDiv = document.getElementById('createCharacterDiv');
-let createCharacterForm = document.getElementById('createCharacterForm');
+// let createCharacterDiv = document.getElementById('createCharacterDiv');
+// let createCharacterForm = document.getElementById('createCharacterForm');
 
 let characterClass = {
     Fighter: {
@@ -24,27 +24,7 @@ class Character {
     }
 }
 
-<<<<<<< Updated upstream
-createCharacterForm.addEventListener('submit', function (event) {
-    event.preventDefault();
-    createCharacterDiv.style.display = "none";
-});
 
-// very temp
-function createCharacter(name, className) {
-    GAME.character = new Character(name, className);
-
-    usrOutput.append("NAME: " + GAME.character.name);
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("CLASS: " + GAME.character.className);
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("ATK: " + GAME.character.atk);
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("DEX: " + GAME.character.dex);
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("CON: " + GAME.character.con);
-    usrOutput.append(document.createElement("br"));
-=======
 function createCharacterScreen() {
     // Selects the first class
     classes[0].checked = true;
@@ -100,5 +80,4 @@ function createCharacterScreen() {
             validated = false;
         }
     }
->>>>>>> Stashed changes
 }
