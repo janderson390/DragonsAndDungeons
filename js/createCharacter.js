@@ -24,6 +24,7 @@ class Character {
     }
 }
 
+<<<<<<< Updated upstream
 createCharacterForm.addEventListener('submit', function (event) {
     event.preventDefault();
     createCharacterDiv.style.display = "none";
@@ -43,4 +44,61 @@ function createCharacter(name, className) {
     usrOutput.append(document.createElement("br"));
     usrOutput.append("CON: " + GAME.character.con);
     usrOutput.append(document.createElement("br"));
+=======
+function createCharacterScreen() {
+    // Selects the first class
+    classes[0].checked = true;
+
+    var validated = false;
+
+    // Sets user name and class when create button is clicked
+    createBtn.onclick = function(e) {
+        e.preventDefault();
+
+        let errorMsg = document.querySelector(".errorMsg");
+        
+        // Validation for user name
+        if (usrName.value === "") {
+            errorMsg.innerHTML = "Please enter your name";
+
+            validated = false;
+        } else if (usrName.value.length > 13) {
+            errorMsg.innerHTML = "Name must be less than 13 characters";
+
+            validated = false;
+        } else {
+            charInfoName.innerHTML = usrName.value;
+            createCharacterDiv.style.display = "none";
+
+            validated = true;
+        }
+
+        // If everything passes, create a character, then start the game
+        if (validated) {
+
+            if (classes[0].checked) {
+                classes = "Fighter";
+                charInfoClass.innerHTML = "Fighter";
+    
+            } else if (classes[1].checked) {
+                classes = "Ranger";
+                charInfoClass.innerHTML = "Ranger";
+    
+            } else if (classes[2].checked) {
+                classes = "Brute";
+                charInfoClass.innerHTML = "Brute";
+            }
+
+            GAME.character = new Character(usrName.value, classes);
+
+            stats[0].innerHTML = GAME.character.atk;
+            stats[1].innerHTML = GAME.character.dex;
+            stats[2].innerHTML = GAME.character.con;
+
+            startGame();
+
+            validated = false;
+        }
+    }
+>>>>>>> Stashed changes
 }
