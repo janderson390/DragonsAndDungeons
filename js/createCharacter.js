@@ -24,25 +24,58 @@ class Character {
     }
 }
 
-// createCharacterForm.addEventListener('submit', function (event) {
-//     event.preventDefault();
-//     createCharacterDiv.style.display = "none";
-// });
+function createCharacterScreen() {
+    // Selects the first class
+    classes[0].checked = true;
 
-// very temp
-function createCharacter(name, className) {
-    GAME.character = new Character(name, className);
+    var validated = false;
 
-    usrOutput.append("NAME: " + GAME.character.name);
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("CLASS: " + GAME.character.className);
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("ATK: " + GAME.character.atk);
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("DEX: " + GAME.character.dex);
-    usrOutput.append(document.createElement("br"));
-    usrOutput.append("CON: " + GAME.character.con);
-    usrOutput.append(document.createElement("br"));
+    // Sets user name and class when create button is clicked
+    createBtn.onclick = function(e) {
+        e.preventDefault();
+
+        let errorMsg = document.querySelector(".errorMsg");
+
+        if (classes[0].checked) {
+            classes = "Fighter";
+            charInfoClass.innerHTML = "Fighter";
+
+        } else if (classes[1].checked) {
+            classes = "Ranger";
+            charInfoClass.innerHTML = "Ranger";
+
+        } else if (classes[2].checked) {
+            classes = "Brute";
+            charInfoClass.innerHTML = "Brute";
+        }
+
+        // Validation for user name
+        if (usrName.value === "") {
+            errorMsg.innerHTML = "Please enter your name";
+
+            validated = false;
+        } else if (usrName.value.length > 13) {
+            errorMsg.innerHTML = "Name must be less than 13 characters";
+
+            validated = false;
+        } else {
+            charInfoName.innerHTML = usrName.value;
+            createCharacterDiv.style.display = "none";
+
+            validated = true;
+        }
+
+        // If everything passes, create a character, then start the game
+        if (validated) {
+            GAME.character = new Character(usrName.value, classes);
+
+            stats[0].innerHTML = GAME.character.atk;
+            stats[1].innerHTML = GAME.character.dex;
+            stats[2].innerHTML = GAME.character.con;
+
+            startGame();
+
+            validated = false;
+        }
+    }
 }
-
-
