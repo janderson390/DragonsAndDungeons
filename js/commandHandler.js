@@ -55,11 +55,33 @@ function runCommand(command, request) {
 }
 
 function moveTo(request) {
+    console.log(typeof request);
+    console.log(request);
     // note: request will prob be cardinal directions
-    if (request === "") {
-        usrOutput.append("You didn't specify a direction.");
+    if (request == "north" || request == "south" || request == "east" || request == "west") {
+        console.log("working");
+        if (currentRoom[request] != wall) {
+
+            if (currentRoom[request] != lockedDoor) {
+                
+                if (currentRoom[request] != blockade) {
+
+                    currentRoom = currentRoom[request];
+                    usrOutput.append(currentRoom.description);
+
+                } else {
+                    usrOutput.append("There is rubble blocking the way..");
+                }
+
+            } else {
+                usrOutput.append("The door is locked.");
+            }
+
+        } else {
+            usrOutput.append("There is a wall blocking the way.");
+        }
     } else {
-        usrOutput.append("You moved " + request + ".");
+        console.log("not working")
     }
 
     // TODO: move locations
