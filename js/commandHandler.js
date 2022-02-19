@@ -55,8 +55,6 @@ function runCommand(command, request) {
 }
 
 function moveTo(request) {
-    console.log(typeof request);
-    console.log(request);
     // note: request will prob be cardinal directions
 
     switch (request) {
@@ -70,7 +68,7 @@ function moveTo(request) {
                     
                     if (currentRoom[request] != blockade) {
     
-                        currentRoom = currentRoom[request];
+                        currentRoom = eval(currentRoom[request]);
                         usrOutput.append(currentRoom.description);
     
                     } else {
@@ -83,7 +81,9 @@ function moveTo(request) {
     
             } else {
                 usrOutput.append("There is a wall blocking the way.");
-            }
+            } 
+            break;
+            
         default:
             displayError();
     }

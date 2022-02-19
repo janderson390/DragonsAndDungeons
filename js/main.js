@@ -13,7 +13,7 @@ function startGame() {
 
     // Create rooms and set the starting room.
     generateRooms();
-    let currentRoom = startingCell;
+    currentRoom = startingCell;
 
     // PARSER
     parserStart();

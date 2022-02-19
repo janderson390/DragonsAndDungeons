@@ -22,7 +22,7 @@ function parserStart() {
             for (let i = 1; i < words.length; i++) {
                 request += words[i] + " ";
             }
-            request.trim();
+            request = request.trim();
 
             // Run the command
             runCommand(command, request);
