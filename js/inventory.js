@@ -35,6 +35,8 @@ class Inventory {
     }
 
     refreshInventoryDisplay() {
+        inventoryTable.innerHTML = "";
+        
         for (let i = 0; i < this.items.length; i++) {
             let tr = document.createElement("tr");
             tr.className = "inventoryItem";
