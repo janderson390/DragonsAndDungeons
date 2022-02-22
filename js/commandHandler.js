@@ -26,6 +26,10 @@ function runCommand(command, request) {
         case "consume":
             consume(request);
             break;
+
+        case "inspect":
+            inspect(request);
+            break;
         
         case "attack":
             attack(request);
@@ -70,20 +74,29 @@ function take(request) {
     if (request === "") {
         usrOutput.append("You didn't take anything.");
     } else {
-        usrOutput.append("You took the " + request + ".");
-    }
+        ////// this is temp, just makin it work
+        let upperCased = request.charAt(0).toUpperCase() + request.slice(1);
+        let item = new Item(upperCased, "This is an item.", Math.floor(Math.random() * 50));
+        GAME.character.inventory.addItem(item);
+        //////
 
-    // TODO: compare request string to items in the room, add item to the inventory
+        usrOutput.append("You took the " + upperCased + ".");
+    }
 }
 
 function drop(request) {
     if (request === "") {
         usrOutput.append("You didn't drop anything.");
-    } else {
-        usrOutput.append("You dropped the " + request + " from your inventory.");
-    }
 
-    // TODO: compare request to items in the inventory, add item to the room
+    // Attempt to remove item from inventory
+    } else if (GAME.character.inventory.removeItem(request)) {
+        usrOutput.append("You dropped the " + request + " from your inventory.");
+
+        // TODO: Add removed item into the room
+
+    } else {
+        usrOutput.append("You didn't have " + request + " in your inventory.");
+    }
 }
 
 function consume(request) {
@@ -96,6 +109,20 @@ function consume(request) {
     // TODO: compare request to items in the inventory, remove from inventory
     // add any effects item had (add hp, etc.), display appropriate text for 
     // liquids and solids, tbd
+}
+
+function inspect(request) {
+    if (request === "") {
+        usrOutput.append("You didn't inspect anything.");
+    } else {
+        let item = GAME.character.inventory.getItemFromName(request);
+
+        if (item != null) {
+            usrOutput.append(item.description);
+        } else {
+            usrOutput.append("You don't have a " + request + " to inspect.")
+        }
+    }
 }
 
 function attack(request) {

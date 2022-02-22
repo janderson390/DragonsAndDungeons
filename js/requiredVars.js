@@ -19,3 +19,6 @@ let charInfoName = document.querySelector(".charInfoName");
 let classes = document.querySelectorAll(".formContainer input[type=\"radio\"]");
 let createBtn = document.querySelector("#submitCharacter");
 let divContainer = document.querySelector(".container");
+
+// INVENTORY
+let inventoryTable = document.querySelector("#inventoryTable");

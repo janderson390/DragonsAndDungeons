@@ -18,6 +18,7 @@ class Character {
         this.atk = characterClass[className].atk;
         this.dex = characterClass[className].dex;
         this.con = characterClass[className].con;
+        this.inventory = new Inventory();
     }
 }
 
@@ -54,6 +55,7 @@ function createCharacterScreen() {
         // If everything passes, create a character, then start the game
         if (validated) {
 
+            // Grab the class the player selected
             if (classes[0].checked) {
                 classes = "Fighter";
                 charInfoClass.innerHTML = "Fighter";
@@ -67,8 +69,15 @@ function createCharacterScreen() {
                 charInfoClass.innerHTML = "Brute";
             }
 
+            // Create our character
             GAME.character = new Character(usrName.value, classes);
 
+            ////// TEMP: Add some basic items to player's inventory
+            GAME.character.inventory.addItem(new Item("Rusty sword", "An old, rusty sword. Can give me tetanus!", 20));
+            GAME.character.inventory.addItem(new Item("Apple", "A ripe, unpoisoned, juicy apple.", 2));
+            //////
+
+            // Display stats to screen;
             stats[0].innerHTML = GAME.character.atk;
             stats[1].innerHTML = GAME.character.dex;
             stats[2].innerHTML = GAME.character.con;
