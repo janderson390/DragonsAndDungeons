@@ -69,7 +69,7 @@ function moveTo(request) {
                     if (currentRoom[request] != blockade) {
     
                         currentRoom = eval(currentRoom[request]);
-                        usrOutput.append(currentRoom.description);
+                        usrOutput.append("You enter " + currentRoom.description);
     
                     } else {
                         usrOutput.append("There is rubble blocking the way..");
