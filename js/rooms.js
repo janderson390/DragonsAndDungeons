@@ -33,10 +33,10 @@ function generateRooms() {
 
     storage = new Room("Storage","Supplies for the mine are stored here", wall, wall, wall, "cavern");
     
-  //2nd Floor
+    //2nd Floor
     
     
     //3rd Floor
-    
+    lair = new Room("Lords Grumb's Lair", "", wall, wall, wall, "stairs")
     
 }
