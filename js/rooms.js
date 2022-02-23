@@ -19,6 +19,8 @@ class Room {
 // Create the rooms in the game
 // follows structure of (Room Name, Room Description, N, S, E, W)
 function generateRooms() {
+    
+   //1st Floor
     startingCell = new Room("Starting Cell","a dust-covered cell, with skeletons all around.", "cavern", wall, wall, wall);
 
     cavern = new Room("Cavern", "an open cavern with markings all over the walls", wall, "mine", "storage", "hallway");
@@ -31,6 +33,10 @@ function generateRooms() {
 
     storage = new Room("Storage","Supplies for the mine are stored here", wall, wall, wall, "cavern");
     
+  //2nd Floor
+    
+    
+    //3rd Floor
     
     
 }
