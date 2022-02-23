@@ -21,7 +21,16 @@ class Room {
 function generateRooms() {
     startingCell = new Room("Starting Cell","a dust-covered cell, with skeletons all around.", "cavern", wall, wall, wall);
 
-    cavern = new Room("Cavern", "an open cavern with markings all over the walls", wall, "startingCell", blockade, "hallway");
+    cavern = new Room("Cavern", "an open cavern with markings all over the walls", wall, "mine", "storage", "hallway");
 
-    hallway = new Room("Hallway", "a narrow hallway very little light to see.", wall, lockedDoor, cavern, "Next Room");
+    hallway = new Room("Hallway", "a narrow hallway very little light to see.", wall, lockedDoor, cavern, "cellar");
+    
+    mine = new Room("Mine", "an abandoned mine", "cavern", wall, wall, wall);
+
+    cellar = new Room("Cellar", "a dark dank cellar", "stairs", wall, "hallway", wall);
+
+    storage = new Room("Storage","Supplies for the mine are stored here", wall, wall, wall, "cavern");
+    
+    
+    
 }
