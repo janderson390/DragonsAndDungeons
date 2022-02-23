@@ -77,6 +77,9 @@ function createCharacterScreen() {
             GAME.character.inventory.addItem(new Item("Apple", "A ripe, unpoisoned, juicy apple.", 2));
             //////
 
+            // Displays Player Health
+            playerHealth.innerHTML = GAME.character.con;
+
             // Display stats to screen;
             stats[0].innerHTML = GAME.character.atk;
             stats[1].innerHTML = GAME.character.dex;

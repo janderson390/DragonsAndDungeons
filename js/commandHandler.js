@@ -156,7 +156,8 @@ function attack(request) {
     if (request === "") {
         usrOutput.append("You didn't target anything.");
     } else {
-        usrOutput.append("You attacked the " + request + ".");
+        //usrOutput.append("You attacked the " + request + ".");
+        combat();
     }
 
     // TODO: hmmmm
