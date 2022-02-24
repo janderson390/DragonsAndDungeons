@@ -76,15 +76,15 @@ function moveTo(request) {
                         usrOutput.append("You enter " + currentRoom.description);
     
                     } else {
-                        usrOutput.append("There is rubble blocking the way..");
+                        usrOutput.append(blockade);
                     }
     
                 } else {
-                    usrOutput.append("The door is locked.");
+                    usrOutput.append(lockedDoor);
                 }
     
             } else {
-                usrOutput.append("There is a wall blocking the way.");
+                usrOutput.append(wall);
             } 
             break;
             
