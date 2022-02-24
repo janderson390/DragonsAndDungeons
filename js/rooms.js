@@ -19,7 +19,7 @@ class Room {
 // Create the rooms in the game
 // follows structure of (Room Name, Room Description, N, S, E, W)
 function generateRooms() {
-    
+
     // First Floor
     startingCell = new Room("Starting Cell","a dust-covered cell, with skeletons all around.", "cavern", wall, wall, wall);
 
@@ -43,7 +43,6 @@ function generateRooms() {
     // Second Floor
 
     // Third Floor
-
- 
+    lair = new Room("Lords Grumb's Lair", "", wall, wall, wall, "stairs")
 
 }
