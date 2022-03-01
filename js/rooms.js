@@ -5,7 +5,7 @@ var lockedDoor = "The door is locked."
 
 // Room structure
 class Room {
-    constructor(roomName, description, north, south, east, west) {
+    constructor(roomName, description,north, south, east, west) {
         this.roomName = roomName;
         this.description = description;
         this.north = north;
@@ -15,7 +15,7 @@ class Room {
     }
 }
 
-
+// Should we add placeholder for an item that could be in the rooms? If there is an item place it otherwise it can be null or the description can be "no item"
 // Create the rooms in the game
 // follows structure of (Room Name, Room Description, N, S, E, W)
 function generateRooms() {

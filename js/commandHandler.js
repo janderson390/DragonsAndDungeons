@@ -222,4 +222,6 @@ function displayError() {
         usrOutput.append(document.createElement("br"));
         usrOutput.append("Type \"help\" to display a list of available commands.");
     }
+
+    
 }
