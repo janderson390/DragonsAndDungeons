@@ -15,7 +15,6 @@ class Inventory {
 
     addItem(item) {
         this.items.push(item);
-        this.refreshInventoryDisplay();
     }
 
     removeItem(itemName) {
@@ -29,28 +28,6 @@ class Inventory {
             }
         }
 
-        this.refreshInventoryDisplay();
-
         return didDrop;
-    }
-
-    refreshInventoryDisplay() {
-        inventoryTable.innerHTML = "";
-        
-        for (let i = 0; i < this.items.length; i++) {
-            let tr = document.createElement("tr");
-            tr.className = "inventoryItem";
-
-            let tdName = document.createElement("td");
-            tdName.innerHTML = this.items[i].name;
-
-            let tdValue = document.createElement("td");
-            tdValue.innerHTML = this.items[i].value;
-
-            tr.append(tdName);
-            tr.append(tdValue);
-
-            inventoryTable.append(tr);
-        }
     }
 }
