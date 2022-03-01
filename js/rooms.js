@@ -38,11 +38,11 @@ function generateRooms() {
     //TODO: replace lockedDoor with "stairs" if key is in inventory
     cellar = new Room("Cellar", "an open cellar with cobwebs all around and bare shelves.", lockedDoor, wall, "hallway", wall);
 
-    stairs = new Room("Stairs", "a dark brick stairwell with the way up to the east.", wall, wall, "next room")
+    stairs = new Room("Stairs", "a dark brick stairwell with the way up to the east.", wall, wall, "next room", wall)
 
     // East
     // TODO: add ability to get key from this room by searching
-    storage = new Room("Storage", "a storage room with crates of supplies.", wall, wall, wall, "cavern");
+    storage = new Room("Storage", "a storage room with crates of supplies and a rusty key haning on the wall.", wall, wall, wall, "cavern");
     storage.inventory.addItem(new Item(questItems[0].name, questItems[0].desc, questItems[0].value)); // This is the key
 
 
