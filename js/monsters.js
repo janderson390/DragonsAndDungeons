@@ -12,7 +12,20 @@ let monster = {
         atk: 1,
         dex: 1,
         con: 38
+    },
+    lamp = {
+        name: "Giant Sentient Lamp",
+        atk: 3,
+        dex: 1,
+        con: 50
+    },
+    pickle = {
+        name: "A pickle",
+        atk: 7,
+        dex: 8,
+        con: 50
     }
+    
 }
 
 let skellyName = monster.skeleton.name;
@@ -25,6 +38,15 @@ let zombieAtk = monster.zombie.atk;
 let zombieDex = monster.zombie.dex;
 let zombieCon = monster.zombie.con;
 
+let lampName = monster.lamp.name;
+let lampAtk = monster.lamp.atk;
+let lampDex = monster.lamp.dex;
+let lampCon = monster.lamp.con;
+
+let pickleName = monster.pickle.name;
+let pickleAtk = monster.pickle.atk;
+let pickleDex = monster.pickle.dex;
+let pickleCon = monster.pickle.con;
 
 /*
 class Monster {
