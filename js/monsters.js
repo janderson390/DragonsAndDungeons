@@ -13,13 +13,13 @@ let monster = {
         dex: 1,
         con: 38
     },
-    lamp = {
+    lamp: {
         name: "Giant Sentient Lamp",
         atk: 3,
         dex: 1,
         con: 50
     },
-    pickle = {
+    pickle: {
         name: "A pickle",
         atk: 7,
         dex: 8,
