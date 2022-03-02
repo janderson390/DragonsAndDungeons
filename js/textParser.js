@@ -26,6 +26,8 @@ function parserStart() {
 
             // Run the command
             runCommand(command, request);
+
+            usrInput.value = "";
         }
     });
 }

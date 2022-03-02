@@ -44,6 +44,10 @@ function runCommand(command, request) {
         case "look":
             observe();
             break;
+        
+        case "search":
+            search();
+            break;
 
         case "help":
             displayHelp();
@@ -76,15 +80,22 @@ function moveTo(request) {
                         usrOutput.append("You enter " + currentRoom.description);
     
                     } else {
-                        usrOutput.append("There is rubble blocking the way..");
+                        usrOutput.append(blockade);
                     }
     
                 } else {
-                    usrOutput.append("The door is locked.");
+                    if (GAME.character.inventory.getItemFromName("rusty key") != null) {
+                        usrOutput.append("The door unlocks. ");
+                        currentRoom = stairs;
+                        usrOutput.append("You enter " + currentRoom.description);
+                    } else {
+                        usrOutput.append(lockedDoor);
+                    }
+                    
                 }
     
             } else {
-                usrOutput.append("There is a wall blocking the way.");
+                usrOutput.append(wall);
             } 
             break;
             
@@ -100,27 +111,39 @@ function take(request) {
     // Check if the user just typed in "take", same as most commands
     if (request === "") {
         usrOutput.append("You didn't take anything.");
-    } else {
-        ////// this is temp, just makin it work
-        let upperCased = request.charAt(0).toUpperCase() + request.slice(1);
-        let item = new Item(upperCased, "This is an item.", Math.floor(Math.random() * 50));
-        GAME.character.inventory.addItem(item);
-        //////
-
-        usrOutput.append("You took the " + upperCased + ".");
+        return;
     }
+
+    // Check if the item exists in the room, then add to character's inventory
+    let item = currentRoom.inventory.getItemFromName(request);
+
+    if (item != null) {
+        GAME.character.inventory.addItem(item);
+        currentRoom.inventory.removeItem(request);
+
+        refreshInventoryDisplay();
+        usrOutput.append("You took the " + request + ".");
+    } else {
+        usrOutput.append("You couldn't find " + request + " in the room.");
+    }
+    
 }
 
 function drop(request) {
     if (request === "") {
         usrOutput.append("You didn't drop anything.");
+        return;
+    }
 
-    // Attempt to remove item from inventory
-    } else if (GAME.character.inventory.removeItem(request)) {
+    // Check if the item exists in the character, then add to room's inventory
+    let item = GAME.character.inventory.getItemFromName(request);
+
+    if (item != null) {
+        currentRoom.inventory.addItem(item);
+        GAME.character.inventory.removeItem(request);
+
+        refreshInventoryDisplay();
         usrOutput.append("You dropped the " + request + " from your inventory.");
-
-        // TODO: Add removed item into the room
-
     } else {
         usrOutput.append("You didn't have " + request + " in your inventory.");
     }
@@ -129,38 +152,49 @@ function drop(request) {
 function consume(request) {
     if (request === "") {
         usrOutput.append("You didn't eat/drink anything.");
-    } else {
-        usrOutput.append("You ate/drank the " + request + ".");
+        return;
     }
+    
+    let item = GAME.character.inventory.getItemFromName(request);
 
-    // TODO: compare request to items in the inventory, remove from inventory
-    // add any effects item had (add hp, etc.), display appropriate text for 
-    // liquids and solids, tbd
+    if (item != null && item instanceof Consumable) {
+        GAME.character.inventory.removeItem(request);
+
+        // TODO: Add any effects item had (add hp, etc.), display appropriate text for 
+        //       liquids and solids, tbd
+
+        refreshInventoryDisplay();
+        usrOutput.append("You ate/drank the " + request + ".");
+    } else if (!(item instanceof Consumable)) {
+        usrOutput.append("You can't eat/drink the " + request + "!");
+    } else {
+        usrOutput.append("You didn't have " + request + " in your inventory.");
+    }
 }
 
 function inspect(request) {
     if (request === "") {
         usrOutput.append("You didn't inspect anything.");
-    } else {
-        let item = GAME.character.inventory.getItemFromName(request);
+        return;
+    }
 
-        if (item != null) {
-            usrOutput.append(item.description);
-        } else {
-            usrOutput.append("You don't have a " + request + " to inspect.")
-        }
+    let item = GAME.character.inventory.getItemFromName(request);
+
+    if (item != null) {
+        usrOutput.append(item.description);
+    } else {
+        usrOutput.append("You don't have a " + request + " to inspect.")
     }
 }
 
 function attack(request) {
     if (request === "") {
         usrOutput.append("You didn't target anything.");
-    } else {
-        //usrOutput.append("You attacked the " + request + ".");
-        combat();
+        return;
     }
 
-    // TODO: hmmmm
+    //usrOutput.append("You attacked the " + request + ".");
+    combat();
 }
 
 function flee() {
@@ -170,9 +204,40 @@ function flee() {
 }
 
 function observe() {
-    usrOutput.append("You observe your surroundings.");
+    usrOutput.append("You see " + currentRoom.description);
+}
 
-    // TODO: grab description from the room and put it here
+function search() {
+    if (currentRoom.inventory.items.length == 0) {
+        usrOutput.append("You searched the room, but didn't find anything.");
+    } else {
+        usrOutput.append("You searched the room and found: ");
+
+        for (let i = 0; i < currentRoom.inventory.items.length; i++) {
+            usrOutput.append(document.createElement("br"));
+            usrOutput.append(currentRoom.inventory.items[i].name);
+        }
+    }
+}
+
+function refreshInventoryDisplay() {
+    inventoryTable.innerHTML = "";
+
+    for (let i = 0; i < GAME.character.inventory.items.length; i++) {
+        let tr = document.createElement("tr");
+        tr.className = "inventoryItem";
+
+        let tdName = document.createElement("td");
+        tdName.innerHTML = GAME.character.inventory.items[i].name;
+
+        let tdValue = document.createElement("td");
+        tdValue.innerHTML = GAME.character.inventory.items[i].value;
+
+        tr.append(tdName);
+        tr.append(tdValue);
+
+        inventoryTable.append(tr);
+    }
 }
 
 var commands = [

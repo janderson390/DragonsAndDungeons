@@ -72,11 +72,6 @@ function createCharacterScreen() {
             // Create our character
             GAME.character = new Character(usrName.value, classes);
 
-            ////// TEMP: Add some basic items to player's inventory
-            GAME.character.inventory.addItem(new Item("Rusty sword", "An old, rusty sword. Can give me tetanus!", 20));
-            GAME.character.inventory.addItem(new Item("Apple", "A ripe, unpoisoned, juicy apple.", 2));
-            //////
-
             // Displays Player Health
             playerHealth.innerHTML = GAME.character.con;
 
