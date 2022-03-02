@@ -85,7 +85,7 @@ function moveTo(request) {
     
                 } else {
                     if (GAME.character.inventory.getItemFromName("rusty key") != null) {
-                        usrOutput.append("The door unlocks. ");
+                        usrOutput.append("You open the door with a key. ");
                         currentRoom = stairs;
                         usrOutput.append("You enter " + currentRoom.description);
                     } else {
