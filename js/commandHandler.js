@@ -194,7 +194,12 @@ function attack(request) {
     }
 
     //usrOutput.append("You attacked the " + request + ".");
-    combat();
+
+    if (monsterCheck(request)) {
+        combat(request);
+    } else {
+        displayError();
+    }
 }
 
 function flee() {

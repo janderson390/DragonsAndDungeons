@@ -21,5 +21,18 @@ let createBtn = document.querySelector("#submitCharacter");
 let divContainer = document.querySelector(".container");
 let playerHealth = document.querySelector(".charInfoHealth");
 
+// MONSTER INFO
+let monsterName;
+let monsterHealth;
+let monsterCon;
+let monsterAtk;
+let monsterDex;
+
+
+
+
 // INVENTORY
 let inventoryTable = document.querySelector("#inventoryTable");
+
+// COMBAT
+let firstHit = true;
