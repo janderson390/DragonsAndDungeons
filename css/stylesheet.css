@@ -70,7 +70,7 @@ h4 {
   color: white;
   overflow: auto;
   height: 420px;
-  margin-left: 1rem;
+  margin-left: 0.55rem;
   }
 
 .displayTxt {
@@ -84,9 +84,13 @@ h4 {
   background-color: rgba(34, 34, 34, 0.575);
 }
 
+.displayTxt p {
+  margin-left: 0.7rem;
+}
+
 #commandForm {
   width: 56.6666666667%; 
-  margin-left: 1rem; 
+  margin-left: 0.55rem;
 }
 
 #commandForm input {
