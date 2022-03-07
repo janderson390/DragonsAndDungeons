@@ -136,7 +136,7 @@ function combat(monster) {
 
             usrOutput.append(monsterName + " is dead.");
 
-            //reset()
+            reset();
 
         }
 
@@ -180,7 +180,7 @@ function combat(monster) {
 
             insults();
 
-            //reset()
+            reset();
 
         }
     }
@@ -217,8 +217,6 @@ function numGenFor(type, atk, dex) {
 
 // Resets monster's and players' health
 function reset() {
-
-    usrOutput.append(br);
 
     monsterCon = GAME.monster.con;
 

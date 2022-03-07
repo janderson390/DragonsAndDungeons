@@ -39,15 +39,13 @@ h4 {
   
 .wrapper {
   position: relative;
-  width: 100%;
-  max-width: 960px;
+  width: 960px;
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
 }
 
 .container {
-  margin: 1em;
   padding: 4px;
   display: table-cell;
   vertical-align: bottom;
@@ -56,29 +54,39 @@ h4 {
   background-repeat: no-repeat;
 }
 
+.container h1 {
+  text-align: center;
+  margin-top: 1rem;
+}
+
 .container p {
   font-size: 14px;
 }
 
 .displayBox {
   float: left;
-  width: 56.6666666667%; 
+  width: 517px; 
   box-sizing: border-box;
   color: white;
+  overflow: auto;
+  height: 420px;
+  margin-left: 1rem;
   }
 
 .displayTxt {
-  height: 400px;
+  height: 420px;
   border-style: groove;
-  border: 1px solid #D1D1D1;
+  border: none;
   border-radius: 4px;
   display: table-cell;
   vertical-align: bottom;
   width: 960px;
+  background-color: rgba(34, 34, 34, 0.575);
 }
 
 #commandForm {
   width: 56.6666666667%; 
+  margin-left: 1rem; 
 }
 
 #commandForm input {
@@ -89,40 +97,46 @@ h4 {
   height: 2rem;
 }
 
-.charInfo {
-  position: absolute;
-  width: 39.33%;
-  margin-left: 56.3333333333%;
-  margin-top: -25.09rem;
+.infoContainer {
+  display: block;
   float: right;
-  font-size: 1rem;
-  border: 1px solid #D1D1D1;
-  border-radius: 4px;
-  
+  position: absolute;
+  margin-left: 34rem;
 }
 
-.charInfo p:last-child {
+.charInfo {
   position: absolute;
+  width: 22.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  background-color: rgba(34, 34, 34, 0.575);
+  height: 18rem;
+}
+
+
+.charInfo p:last-child {
   margin-top: -13rem;
   margin-left: 14rem;
 }
 
 .inventory {
   position: absolute;
-  width: 39.33%;
-  margin-left: 56.3333333333%;
-  margin-top: -5.8rem;
+  margin-top: 18.5rem;
+  width: 22.5rem; 
   float: right;
   font-size: 1rem;
-  border: 1px solid #D1D1D1;
   border-radius: 4px;
+  background-color: rgba(34, 34, 34, 0.575);
 }
 
 .charInfo h4, .inventory h4 {
-  border-bottom: 1px solid #D1D1D1;
+  text-align: center;
+  background-color: rgba(46, 46, 46, 0.473);
+  color: #D1D1D1;
+  margin-bottom: 1rem;
 }
 
-.inventory table, .charInfo > p{
+.inventory table, .charInfo > p {
   margin-left: 1rem;
   font-size: 1rem;
 }
@@ -146,6 +160,7 @@ h4 {
   padding: 4rem;
   margin: auto;
   width: 100%;
+
 }
 
 #createCharacterForm input[type="text"] {
@@ -155,12 +170,11 @@ h4 {
   width: 40%;
   outline: none;
   color: white;
-  background: rgba(185, 185, 185, 0.24);
+  background-color: rgba(34, 34, 34, 0.575);
 }
 
 #createCharacterForm input[type="text"]:focus {
-  border-bottom: 2px solid rgb(48, 48, 48);
-  
+  border-bottom: 2px solid white;
 }
 
 
@@ -215,18 +229,38 @@ h4 {
   font-size: 38px;
 }
 
-/* Mobile */
-@media (max-width: 570PX) {
-  .charInfo h4, .inventory h4 {
-    font-size: 32px;
-  }
+/* Scroll Bar */
 
+::-webkit-scrollbar {
+  width: 5px;
 }
+
+::-webkit-scrollbar-track {
+  background-color: rgba(34, 34, 34, 0.575);
+}
+
+::-webkit-scrollbar-thumb {
+  background: white;
+  
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #D1D1D1;
+}
+
+/* Mobile */
+
 
 @media (max-width: 500px) {
 
+  .container {
+    width: 420px;
+    margin: 0 auto;
+    background-image: none;
+  }
+
   .wrapper {
-    width: 85%;
+    width: 420px;
     padding: 0;
     display: block;
   }
@@ -236,23 +270,37 @@ h4 {
   }
 
   .displayBox {
-    width: 100%;
+    width: 420px;
+    margin: 0 auto;
   }
 
-  form {
-    width: 100%;
+  
+
+  #commandForm {
+    width: 420px;
+    margin: 0 auto;
+  }
+
+  .infoContainer {
+    position: absolute;
+    float: none;
+    margin: 36rem 0;
+    width: 420px;
   }
 
   .charInfo {
-    float: none;
-    margin: 8rem 25%;
-    text-align: center;
+    width: 420px;
   }
 
   .inventory {
-    float: none;
-    margin: 24.5rem 25%;
-    text-align: center;
+    width: 420px;
+    margin: 19rem 0;
+  }
+
+  .charInfo > p:last-child {
+    position: absolute;
+    margin-top: -11.35rem;
+    float: right;
   }
 
   .charInfo > h4, .inventory > h4 {
@@ -261,7 +309,7 @@ h4 {
     margin-bottom: .5rem;
   }
 
-  .inventory table, .charInfo > p{
+  .inventory table, .charInfo > p {
     text-align: center;
     width: 6.5rem;
     font-size: 14px;

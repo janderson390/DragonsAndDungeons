@@ -11,6 +11,10 @@ var GAME = {
 let usrInput = document.querySelector("#usrInput");
 let usrOutput = document.querySelector(".displayTxt p");
 
+// FORMS
+let submitForm = document.querySelector("#commandForm")
+submitForm.addEventListener("submit", function(e){e.preventDefault();})
+
 // CHARACTER INFO
 let charInfoClass = document.querySelector(".charInfoClass");
 let stats = document.querySelectorAll(".stats");
@@ -27,7 +31,6 @@ let monsterHealth;
 let monsterCon;
 let monsterAtk;
 let monsterDex;
-
 
 
 

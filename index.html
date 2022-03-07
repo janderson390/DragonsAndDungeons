@@ -31,9 +31,7 @@
     <div class="container">
         <h1>Trials of Grumb</h1>
 
-        <div class="displayBox">
-            <div class="displayTxt"><p></p></div>
-
+        <div class="infoContainer">
             <div class="charInfo">
                 <h4>Character Info</h4>
                 <p>Name: <span class="charInfoName"></span></p>
@@ -51,10 +49,15 @@
             </div>
         </div>
 
-        <form onSubmit="return false;" autocomplete="off" id="commandForm">
+        <div class="displayBox">
+            <div class="displayTxt"><p></p></div> 
+        </div>
+
+        <form autocomplete="off" id="commandForm">
             <input type="text" id="usrInput"/>
+            <p>Type "help" for list of commands</p>
         </form>
-        <p>Type "help" for list of commands</p>
+        
     </div> 
 
     <!-- character creation div that will vanish upon character creation -->
