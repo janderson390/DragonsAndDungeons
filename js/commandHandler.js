@@ -77,7 +77,7 @@ function moveTo(request) {
                     if (currentRoom[request] != blockade) {
     
                         currentRoom = eval(currentRoom[request]);
-                        usrOutput.append("You enter " + currentRoom.description);
+                        displayNewRoomInfo();
     
                     } else {
                         usrOutput.append(blockade);
@@ -87,7 +87,7 @@ function moveTo(request) {
                     if (GAME.character.inventory.getItemFromName("rusty key") != null) {
                         usrOutput.append("You open the door with a key. ");
                         currentRoom = stairs;
-                        usrOutput.append("You enter " + currentRoom.description);
+                        displayNewRoomInfo();
                     } else {
                         usrOutput.append(lockedDoor);
                     }
@@ -105,6 +105,25 @@ function moveTo(request) {
   
 
     // TODO: move locations
+}
+
+function displayNewRoomInfo() {
+    usrOutput.append("You enter " + currentRoom.description);
+
+    if (currentRoom.inventory.items.length > 0) {
+        usrOutput.append(document.createElement("br"));
+
+        if (currentRoom.inventory.items.length == 1) {
+            usrOutput.append("You see an item of interest: ");
+        } else {
+            usrOutput.append("You see several items of interest: ");
+        }
+
+        for (let i = 0; i < currentRoom.inventory.items.length; i++) {
+            usrOutput.append(document.createElement("br"));
+            usrOutput.append(currentRoom.inventory.items[i].name);
+        }
+    }
 }
 
 function take(request) {
@@ -160,13 +179,24 @@ function consume(request) {
     if (item != null && item instanceof Consumable) {
         GAME.character.inventory.removeItem(request);
 
-        // TODO: Add any effects item had (add hp, etc.), display appropriate text for 
-        //       liquids and solids, tbd
+        // Add effects
+        playerHealth.innerHTML = Number(playerHealth.innerHTML) + item.effect;
+        
+        // Display what happened
+        let context = (item.type === foodType.Solid) ? "ate" : "drank";
+        usrOutput.append("You " + context + " the " + request + ".");
+        usrOutput.append(document.createElement("br"));
 
+        context = (item.effect > 0) ? "gained" : "lost";
+        usrOutput.append("You " + context + " " + item.effect + " health points!");
+
+        // Finally refresh the inventory display
         refreshInventoryDisplay();
-        usrOutput.append("You ate/drank the " + request + ".");
+
     } else if (!(item instanceof Consumable)) {
-        usrOutput.append("You can't eat/drink the " + request + "!");
+        let context = (item.type === foodType.Solid) ? "eat" : "drink";
+        usrOutput.append("You can't " + context + " the " + request + "!");
+
     } else {
         usrOutput.append("You didn't have " + request + " in your inventory.");
     }
@@ -274,14 +304,6 @@ function clearOutput() {
     usrOutput.innerHTML = "";
 }
 
-var errorMsgs = [
-    "Your command flew onto deaf ears.",
-    "You spoke and what came out was gibberish.",
-    "I think you misspoke.",
-    "You hit your head or something?",
-    "Command invalid."
-]
-
 function displayError() {
     // Grab a random error msg and display it
     usrOutput.append(errorMsgs[Math.floor(Math.random() * errorMsgs.length)]);
@@ -291,7 +313,5 @@ function displayError() {
         helpCount = 0;
         usrOutput.append(document.createElement("br"));
         usrOutput.append("Type \"help\" to display a list of available commands.");
-    }
-
-    
+    }    
 }

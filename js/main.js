@@ -8,13 +8,10 @@ function main() {
 
 function startGame() {
     // SETUP GAME (level/rooms, etc.)
-    // Description of the first room will go here
-    usrOutput.append("You awaken in a dust-covered cell, surrounded by skeletons in shackles.");
-    
-
     // Create rooms and set the starting room.
     generateRooms();
     currentRoom = startingCell;
+    displayNewRoomInfo();
 
     // PARSER
     parserStart();

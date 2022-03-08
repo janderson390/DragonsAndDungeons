@@ -10,6 +10,13 @@ var GAME = {
 // FOR TEXT PARSER
 let usrInput = document.querySelector("#usrInput");
 let usrOutput = document.querySelector(".displayTxt p");
+let errorMsgs = [
+    "Your command flew onto deaf ears.",
+    "You spoke and what came out was gibberish.",
+    "I think you misspoke.",
+    "You hit your head or something?",
+    "Command invalid."
+]
 
 // FORMS
 let submitForm = document.querySelector("#commandForm")
@@ -34,8 +41,12 @@ let monsterDex;
 
 
 
-// INVENTORY
+// INVENTORY AND ITEMS
 let inventoryTable = document.querySelector("#inventoryTable");
+let foodType = {
+    Solid: 0,
+    Liquid: 1
+}
 
 // COMBAT
 let firstHit = true;
