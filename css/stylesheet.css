@@ -133,6 +133,7 @@ h4 {
   font-size: 1rem;
   border-radius: 4px;
   background-color: rgba(34, 34, 34, 0.575);
+  color: white;
 }
 
 .charInfo h4, .inventory h4 {
