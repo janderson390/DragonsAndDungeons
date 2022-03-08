@@ -44,7 +44,7 @@ function generateRooms() {
 
     // East
     // TODO: add ability to get key from this room by searching
-    storage = new Room("Storage", "a storage room with crates of supplies and a rusty key haning on the wall.", wall, wall, wall, "cavern");
+    storage = new Room("Storage", "a storage room with crates of supplies.", wall, wall, wall, "cavern");
     storage.inventory.addItem(new Item(questItem.rustyKey)); // This is the key
 
 
@@ -52,6 +52,6 @@ function generateRooms() {
 
 
     // THIRD FLOOR
-    lair = new Room("Lords Grumb's Lair", "", wall, wall, wall, "stairs")
+    lair = new Room("Lords Grumb's Lair", "", wall, wall, wall, "stairs");
 
 }

@@ -5,6 +5,10 @@ var helpCount = 0;
 function runCommand(command, request) {
     usrOutput.append(document.createElement("br"));
 
+    // Set the output div to scroll down when text is added
+    // timeout is so that it scrolls all the way down because this happens as the text is displaying, not after.
+    setTimeout(updateScrolling, 10);
+
     switch (command) {
         case "move":
         case "go":
@@ -313,5 +317,9 @@ function displayError() {
         helpCount = 0;
         usrOutput.append(document.createElement("br"));
         usrOutput.append("Type \"help\" to display a list of available commands.");
-    }    
+    }
+}
+
+function updateScrolling() {
+    outputDisplay.scrollTop = outputDisplay.scrollHeight;
 }

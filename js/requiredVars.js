@@ -50,3 +50,6 @@ let foodType = {
 
 // COMBAT
 let firstHit = true;
+
+// OUTPUT DISPLAY
+let outputDisplay = document.querySelector(".displayBox")
