@@ -40,7 +40,7 @@ function generateRooms() {
     cellar = new Room("Cellar", "an open cellar with cobwebs all around and bare shelves. You notice as you brush aside the cobwebs that there seems to be a locked door to your north, and walls to the west and south.", lockedDoor, wall, "hallway", wall);
     cellar.inventory.addItem(new Consumable(consumable.deadSpider));
 
-    stairs = new Room("Stairs", "a dark brick stairwell with the way up to the east.", wall, wall, "next room", wall)
+   stairs = new Room("Stairs", "a dark brick stairwell with the way up to the east.", wall, wall, "kitchen", wall)
 
     // East
     // TODO: add ability to get key from this room by searching
@@ -49,9 +49,25 @@ function generateRooms() {
 
 
     // SECOND FLOOR
+    kitchen = new Room("Kitchen", "The STAIRS break on your way up leaving you in a grotesque KITCHEN; mold lined walls, grease splatted everywhere and a stench of inedible food.  A broken door hangs in the doorway to the SOUTH.", "stairs", "armory", wall, wall);
+    kitchen.inventory.addItem(new Consumable(consumable.apple));
 
+    // plank found here if we add it
+    armory - new Room("Armory", "Raided weapon racks surround the room. Through the open doorway on the WEST wall a BRIDGE can be seen.", "kitchen", wall, wall, "bridge");
+
+    // add if we want plank
+    //ibridge = new Room("Incomplete Bridge", "Marvelously engineered unfinished bridge. A plank would be able to make it to the other side", wall, wall, "kitchen", "throne")
+    // add mobs
+    bridge = new Room("Bridge", "A stone bridge over the CAVERN, monsters block your path. WEST takes you back to the AROMRY, EAST lies the GREAT HALL.", wall, wall, "greatHall", "armory");
+
+    greatHall = new Room("Great Hall", "A vast room spralls before you once holding grand feasts but no longer. The NORTH wall is broken giving a glimpse of the THRONE ROOM", "throne", wall, wall, "bridge");
+
+    throne = new Room("Throne Room", "Lord Grumb's desolate throne sits center as the focal point. A door can be seen NORTH of the throne.", "tower", "greatHall", wall, wall);
+
+    tower = new Room("Great Tower", "A large tower where Lord Grumb commands his forces. Taking the stairs leads to a SOUTH facing opening reek with a foul stench.", wall, "lair", wall, wall);
 
     // THIRD FLOOR
-    lair = new Room("Lords Grumb's Lair", "", wall, wall, wall, "stairs");
+    lair = new Room("Lords Grumb's Lair", "As you come through the opening you gaze upon the source of the odor...", "tower", wall, wall, wall);
+
 
 }
