@@ -2,7 +2,7 @@
 class Item {
     constructor(itemData) {
         this.name = itemData.name;
-        this.description = itemData.description;
+        this.description = itemData.desc;
         this.value = itemData.value;
     }
 }

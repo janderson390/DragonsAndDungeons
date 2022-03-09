@@ -198,8 +198,7 @@ function consume(request) {
         refreshInventoryDisplay();
 
     } else if (!(item instanceof Consumable)) {
-        let context = (item.type === foodType.Solid) ? "eat" : "drink";
-        usrOutput.append("You can't " + context + " the " + request + "!");
+        usrOutput.append("You can't consume the " + request + "!");
 
     } else {
         usrOutput.append("You didn't have " + request + " in your inventory.");
