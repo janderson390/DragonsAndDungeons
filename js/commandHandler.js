@@ -286,6 +286,8 @@ var commands = [
     "attack",
     "flee, run",
     "observe, look",
+    "inspect",
+    "search",
     "help",
     "clearoutput"
 ]
