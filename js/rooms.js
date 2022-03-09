@@ -53,7 +53,7 @@ function generateRooms() {
     kitchen.inventory.addItem(new Consumable(consumable.apple));
 
     // plank found here if we add it
-    armory - new Room("Armory", "Raided weapon racks surround the room. Through the open doorway on the WEST wall a BRIDGE can be seen.", "kitchen", wall, wall, "bridge");
+    armory = new Room("Armory", "Raided weapon racks surround the room. Through the open doorway on the WEST wall a BRIDGE can be seen.", "kitchen", wall, wall, "bridge");
 
     // add if we want plank
     //ibridge = new Room("Incomplete Bridge", "Marvelously engineered unfinished bridge. A plank would be able to make it to the other side", wall, wall, "throne", "kitchen")
