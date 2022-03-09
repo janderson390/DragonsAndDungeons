@@ -29,7 +29,7 @@ function generateRooms() {
     cavern.inventory.addItem(new Consumable(consumable.apple));
 
     // South
-    mine = new Room("Mine", "an abandoned mine with rotting corpses and worn pickaxes on the floor. There seems to have been a cave in, because there are rocks blocking the paths except for the one you came from.", "cavern", wall, wall, wall);
+    mine = new Room("Mine", "an abandoned mine with rotting corpses and worn pickaxes on the floor. Rocks from a cave in block all paths except whence you came.", "cavern", wall, wall, wall);
     mine.inventory.addItem(new Weapon(weapon.wornPickaxe));
     mine.inventory.addItem(new Item(item.smallRock));
 
@@ -37,7 +37,7 @@ function generateRooms() {
     hallway = new Room("Hallway", "a narrow hallway very little light to see. You can hear a faint scream as you enter the room. You have two options... go West or go East.", wall, wall, "cavern", "cellar");
 
     //TODO: replace lockedDoor with "stairs" if key is in inventory
-    cellar = new Room("Cellar", "an open cellar with cobwebs all around and bare shelves. You notice as you brush aside the cobwebs that there seems to be a locked door to your north, and walls to the west and south.", lockedDoor, wall, "hallway", wall);
+    cellar = new Room("Cellar", "an open cellar with cobwebs all around and bare shelves. You notice as you brush aside the cobwebs that there seems to be a locked door to your north.", lockedDoor, wall, "hallway", wall);
     cellar.inventory.addItem(new Consumable(consumable.deadSpider));
 
    stairs = new Room("Stairs", "a dark brick stairwell with the way up to the east.", wall, wall, "kitchen", wall)
@@ -56,7 +56,7 @@ function generateRooms() {
     armory - new Room("Armory", "Raided weapon racks surround the room. Through the open doorway on the WEST wall a BRIDGE can be seen.", "kitchen", wall, wall, "bridge");
 
     // add if we want plank
-    //ibridge = new Room("Incomplete Bridge", "Marvelously engineered unfinished bridge. A plank would be able to make it to the other side", wall, wall, "kitchen", "throne")
+    //ibridge = new Room("Incomplete Bridge", "Marvelously engineered unfinished bridge. A plank would be able to make it to the other side", wall, wall, "throne", "kitchen")
     // add mobs
     bridge = new Room("Bridge", "A stone bridge over the CAVERN, monsters block your path. WEST takes you back to the AROMRY, EAST lies the GREAT HALL.", wall, wall, "greatHall", "armory");
 
