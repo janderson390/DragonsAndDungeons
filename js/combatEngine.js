@@ -91,9 +91,6 @@ function combat(monster) {
             }
 
         }
-
-        console.log("firstHit: " + firstHit);
-        console.log(monsterHealth);
         
     } else { // After first hit
 
@@ -136,8 +133,6 @@ function combat(monster) {
 
             usrOutput.append(monsterName + " is dead.");
 
-            reset();
-
         }
 
 
@@ -162,7 +157,15 @@ function combat(monster) {
                         // Normal hit
                         monsterHealth -= playerAtk;
 
-                        usrOutput.append("You landed a hit. " + monsterName + " now has " + monsterHealth + " HP");
+                        if (monsterHealth < 0) {
+                            usrOutput.append("You landed a hit. " + monsterName + " is dead.")
+
+                        } else {
+
+                            usrOutput.append("You landed a hit. " + monsterName + " now has " + monsterHealth + " HP");
+
+                        }
+
 
                     }
 
@@ -180,7 +183,7 @@ function combat(monster) {
 
             insults();
 
-            reset();
+            reset("player");
 
         }
     }
@@ -215,14 +218,24 @@ function numGenFor(type, atk, dex) {
 } // Last bracket for numGenFor()
 
 
-// Resets monster's and players' health
-function reset() {
-
-    monsterCon = GAME.monster.con;
-
-    playerHealth.innerHTML = GAME.character.con;
+// Resets monster's health
+function reset(type) {
 
     firstHit = true;
+
+    if (type == "monster") { // Monster is dead
+
+        monsterCon = GAME.monster.con;
+
+    } else if (type == "player") { // Game over, player is dead
+
+        playerHealth.innerHTML = GAME.character.con;
+
+        monsterCon = GAME.monster.con;
+
+
+    } 
+
 
 } // Last bracket for reset()
 
@@ -242,19 +255,73 @@ function insults() {
 
     usrOutput.append("- Lord Grumb");
 
-} // Last bracket for insults
+} // Last bracket for insults()
 
 
-function monsterCheck(name) {  
+// Validates if there is a monster
+function monsterCheck(name) { 
 
-    if (name == "skeleton" || name == "zombie" || name == "lamp" || name == "pickle") {
+    let skeletonName = monster.skeleton.name.toLowerCase();
+    let zombieName = monster.zombie.name.toLowerCase();
+    let lampName = monster.lamp.name.toLowerCase();
+    let pickleName = monster.pickle.name.toLowerCase();
+    let currentMob = currentRoom.mob.name.toLowerCase();
 
-        return true;
+    // This shortens the name of "Giant Sentient Lamp" and "A pickle" monster
+    if (name == "lamp") {
+
+        name = lampName;
+
+    } else if (name == "pickle") {
+
+        name = pickleName;
+
+    }
+
+    
+    if (name == skeletonName || name == zombieName || name == lampName || name == pickleName) {
+
+            if (currentMob != undefined || currentMob != null) {
+
+                console.log(currentMob + " is found in current room");
+
+                // Checks currentMob
+                if (currentMob == skeletonName && name == currentMob) {
+
+                    return true;
+
+                } else if (currentMob == zombieName && name == currentMob){
+
+                    return true;
+
+                } else if (currentMob == lampName && name == currentMob){
+
+                    return true;
+
+                } else if (currentMob == pickleName && name == currentMob){
+
+                    return true;
+
+                } else {
+
+                    usrOutput.append(name + " is not found.")
+
+                }
+
+
+            } else {
+
+                return false;
+
+            }
+
 
     } else {
+
+        usrOutput.append(name + " is not found.")
 
         return false;
 
     }
 
-}
+} // Last bracket for monsterCheck()

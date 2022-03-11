@@ -29,6 +29,7 @@ function generateRooms() {
 
     cavern = new Room("Cavern", "an open cavern with markings all over the walls. It seems to encompase the room you started in. During your search, you find the north to be blocked. Where do you go?", blockade, "mine", "storage", "hallway", null);
     cavern.inventory.addItem(new Consumable(consumable.apple));
+    cavern.mob = monster.skeleton;
 
     // South
     mine = new Room("Mine", "an abandoned mine with rotting corpses and worn pickaxes on the floor. Rocks from a cave in block all paths except whence you came.", "cavern", wall, wall, wall, null);

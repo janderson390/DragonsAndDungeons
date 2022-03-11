@@ -82,6 +82,8 @@ function moveTo(request) {
     
                         currentRoom = eval(currentRoom[request]);
                         displayNewRoomInfo();
+
+                        reset("monster");
     
                     } else {
                         usrOutput.append(blockade);
@@ -226,12 +228,8 @@ function attack(request) {
         return;
     }
 
-    //usrOutput.append("You attacked the " + request + ".");
-
     if (monsterCheck(request)) {
         combat(request);
-    } else {
-        displayError();
     }
 }
 
