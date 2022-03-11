@@ -11,54 +11,72 @@ function combat(monster) {
     monsterName = GAME.monster.monsterName;
     monsterAtk = GAME.monster.atk;
     monsterDex = GAME.monster.dex;
-    
+
 
     if (firstHit) {
+        console.log("first hit");
 
         firstHit = false;
 
         monsterCon = GAME.monster.con;
 
+        console.log("first hit monster health: " + monsterCon);
+
         // Monster
         if (monsterCon > 0) {
-            // Chance to hit
-            if (numGenFor("hitChance")) {
 
-                // Chance to crit
-                if (numGenFor("critChance", monsterAtk, monsterDex)) {
+            // Check if player is still alive
+            if (playerHealth.innerHTML > 0) {
 
-                    // Adding crit rate to monster's attack
-                    monsterAtk += numGenFor("crit", monsterAtk, monsterDex);
+                // Chance to hit
+                if (numGenFor("hitChance")) {
 
-                    playerHealth.innerHTML -= monsterAtk;
+                    // Chance to crit
+                    if (numGenFor("critChance", monsterAtk, monsterDex)) {
 
-                    usrOutput.append(monsterName + " landed a critical hit.");
+                        // Adding crit rate to monster's attack
+                        monsterAtk += numGenFor("crit", monsterAtk, monsterDex);
 
-                    usrOutput.append(br);
+                        playerHealth.innerHTML -= monsterAtk;
 
-                    customAppend(monsterName + " landed a critical hit.");
+                        usrOutput.append(monsterName + " landed a critical hit.");
 
-                } else { // Normal hit
-                    playerHealth.innerHTML -= monsterAtk;
+                        usrOutput.append(br);
 
-                    usrOutput.append(monsterName + " hits you for " + monsterAtk + " points");
+                    } else { // Normal hit
+
+                        playerHealth.innerHTML -= monsterAtk;
+
+                        usrOutput.append(monsterName + " hits you for " + monsterAtk + " points");
+
+                        usrOutput.append(br);
+
+                    }
+
+                } else { // Monster missed hit
+
+                    usrOutput.append(monsterName + " missed.");
 
                     usrOutput.append(br);
 
                 }
 
-            } else { // Monster missed hit
+            } 
 
-                usrOutput.append(monsterName + " missed.");
+        } else { // Monster is dead
 
-                usrOutput.append(br);
+            usrOutput.append(monsterName + " is dead.");
 
-            }
         }
 
 
         // Player is attacking monster
         if (playerHealth.innerHTML > 0) {
+
+            if (monsterHealth == undefined || monsterHealth == null) {
+                console.log("monster health was undefined");
+                monsterHealth = GAME.monster.con;
+            }
 
             // If monster is still alive 
             if (monsterCon > 0) {
@@ -74,11 +92,26 @@ function combat(monster) {
 
                         monsterHealth = monsterCon - playerAtk;
 
+                        // Check if monster died from hit
+                        if (monsterHealth < 0) {
+
+                            usrOutput.append("You landed a critical hit. " + monsterName + " is now dead.");
+
+                        } else {
+
+                            usrOutput.append("You landed a critical hit. " + monsterName + " now has " + monsterHealth + " HP");
+
+                        }
+
                     } else {
                         // Normal hit
                         monsterHealth = monsterCon - playerAtk;
 
-                        usrOutput.append("You landed a hit. " + monsterName + " now has " + monsterHealth + " HP");
+                        if (monsterHealth < 0) {
+                            usrOutput.append("You landed a hit. " + monsterName + " is now dead.");
+                        } else {
+                            usrOutput.append("You landed a hit. " + monsterName + " now has " + monsterHealth + " HP");
+                        }
 
                     }
 
@@ -91,8 +124,10 @@ function combat(monster) {
             }
 
         }
-        
+
     } else { // After first hit
+
+        console.log("Monster Health: " + monsterHealth);
 
         // Monster
         if (monsterHealth > 0) {
@@ -153,8 +188,17 @@ function combat(monster) {
 
                         monsterHealth -= playerAtk;
 
-                    } else {
-                        // Normal hit
+                        if (monsterHealth < 0) {
+                            usrOutput.append("You landed a critical hit. " + monsterName + " is dead.")
+
+                        } else {
+
+                            usrOutput.append("You landed a critical hit. " + monsterName + " now has " + monsterHealth + " HP");
+
+                        }
+
+                    } else { // Normal hit
+
                         monsterHealth -= playerAtk;
 
                         if (monsterHealth < 0) {
@@ -165,7 +209,6 @@ function combat(monster) {
                             usrOutput.append("You landed a hit. " + monsterName + " now has " + monsterHealth + " HP");
 
                         }
-
 
                     }
 
@@ -179,11 +222,32 @@ function combat(monster) {
 
         } else { // Player is dead
 
+            // Disable text input
+            usrInput.onkeydown = function() {return false};
+
             usrOutput.innerHTML = "";
 
             insults();
 
-            reset("player");
+            // Sets a timeout of 3 seconds
+            setTimeout(function () {
+
+                usrOutput.innerHTML = "";
+
+                usrOutput.append("Resetting Game...");
+
+                // Sets another timeout of 3 seconds before calling reset function
+                setTimeout(function () {
+
+                    reset("player");
+
+                    // Re-enable text input
+                    usrInput.onkeydown = function() {return true;};
+
+                }, 3000)
+
+
+            }, 3000)
 
         }
     }
@@ -223,18 +287,27 @@ function reset(type) {
 
     firstHit = true;
 
+    console.clear();
+
     if (type == "monster") { // Monster is dead
 
         monsterCon = GAME.monster.con;
 
     } else if (type == "player") { // Game over, player is dead
 
+        usrOutput.innerHTML = "";
+
+        generateRooms();
+
+        currentRoom = startingCell;
+
+        usrOutput.append("Starting Cell", "a dust-covered cell, with skeletons all around. There seems to be a passage to the north out of this room.");
+
         playerHealth.innerHTML = GAME.character.con;
 
         monsterCon = GAME.monster.con;
 
-
-    } 
+    }
 
 
 } // Last bracket for reset()
@@ -259,7 +332,7 @@ function insults() {
 
 
 // Validates if there is a monster
-function monsterCheck(name) { 
+function monsterCheck(name) {
 
     let skeletonName = monster.skeleton.name.toLowerCase();
     let zombieName = monster.zombie.name.toLowerCase();
@@ -278,42 +351,41 @@ function monsterCheck(name) {
 
     }
 
-    
     if (name == skeletonName || name == zombieName || name == lampName || name == pickleName) {
 
-            if (currentMob != undefined || currentMob != null) {
+        if (currentMob != undefined || currentMob != null) {
 
-                console.log(currentMob + " is found in current room");
+            console.log(currentMob + " is found in current room");
 
-                // Checks currentMob
-                if (currentMob == skeletonName && name == currentMob) {
+            // Checks currentMob
+            if (currentMob == skeletonName && name == currentMob) {
 
-                    return true;
+                return true;
 
-                } else if (currentMob == zombieName && name == currentMob){
+            } else if (currentMob == zombieName && name == currentMob) {
 
-                    return true;
+                return true;
 
-                } else if (currentMob == lampName && name == currentMob){
+            } else if (currentMob == lampName && name == currentMob) {
 
-                    return true;
+                return true;
 
-                } else if (currentMob == pickleName && name == currentMob){
+            } else if (currentMob == pickleName && name == currentMob) {
 
-                    return true;
-
-                } else {
-
-                    usrOutput.append(name + " is not found.")
-
-                }
-
+                return true;
 
             } else {
 
-                return false;
+                usrOutput.append(name + " is not found.")
 
             }
+
+
+        } else {
+
+            return false;
+
+        }
 
 
     } else {
