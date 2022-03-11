@@ -14,13 +14,12 @@ function combat(monster) {
 
 
     if (firstHit) {
-        console.log("first hit");
 
         firstHit = false;
 
         monsterCon = GAME.monster.con;
 
-        console.log("first hit monster health: " + monsterCon);
+        monsterHealth = monsterCon;
 
         // Monster
         if (monsterCon > 0) {
@@ -61,7 +60,7 @@ function combat(monster) {
 
                 }
 
-            } 
+            }
 
         } else { // Monster is dead
 
@@ -72,11 +71,6 @@ function combat(monster) {
 
         // Player is attacking monster
         if (playerHealth.innerHTML > 0) {
-
-            if (monsterHealth == undefined || monsterHealth == null) {
-                console.log("monster health was undefined");
-                monsterHealth = GAME.monster.con;
-            }
 
             // If monster is still alive 
             if (monsterCon > 0) {
@@ -108,7 +102,9 @@ function combat(monster) {
                         monsterHealth = monsterCon - playerAtk;
 
                         if (monsterHealth < 0) {
+
                             usrOutput.append("You landed a hit. " + monsterName + " is now dead.");
+
                         } else {
                             usrOutput.append("You landed a hit. " + monsterName + " now has " + monsterHealth + " HP");
                         }
@@ -223,7 +219,7 @@ function combat(monster) {
         } else { // Player is dead
 
             // Disable text input
-            usrInput.onkeydown = function() {return false};
+            usrInput.onkeydown = function () { return false };
 
             usrOutput.innerHTML = "";
 
@@ -242,7 +238,7 @@ function combat(monster) {
                     reset("player");
 
                     // Re-enable text input
-                    usrInput.onkeydown = function() {return true;};
+                    usrInput.onkeydown = function () { return true; };
 
                 }, 3000)
 
@@ -289,25 +285,29 @@ function reset(type) {
 
     console.clear();
 
-    if (type == "monster") { // Monster is dead
+    if (currentRoom.mob != null) {
+        if (type == "monster") { // Monster is dead
 
-        monsterCon = GAME.monster.con;
-
-    } else if (type == "player") { // Game over, player is dead
-
-        usrOutput.innerHTML = "";
-
-        generateRooms();
-
-        currentRoom = startingCell;
-
-        usrOutput.append("Starting Cell", "a dust-covered cell, with skeletons all around. There seems to be a passage to the north out of this room.");
-
-        playerHealth.innerHTML = GAME.character.con;
-
-        monsterCon = GAME.monster.con;
-
+            monsterCon = GAME.monster.con;
+    
+        } else if (type == "player") { // Game over, player is dead
+    
+            usrOutput.innerHTML = "";
+    
+            generateRooms();
+    
+            currentRoom = startingCell;
+    
+            usrOutput.append("Starting Cell", "a dust-covered cell, with skeletons all around. There seems to be a passage to the north out of this room.");
+    
+            playerHealth.innerHTML = GAME.character.con;
+    
+            monsterCon = GAME.monster.con;
+    
+        }
     }
+
+   
 
 
 } // Last bracket for reset()
@@ -338,24 +338,30 @@ function monsterCheck(name) {
     let zombieName = monster.zombie.name.toLowerCase();
     let lampName = monster.lamp.name.toLowerCase();
     let pickleName = monster.pickle.name.toLowerCase();
-    let currentMob = currentRoom.mob.name.toLowerCase();
+    let currentMob;
 
-    // This shortens the name of "Giant Sentient Lamp" and "A pickle" monster
-    if (name == "lamp") {
-
-        name = lampName;
-
-    } else if (name == "pickle") {
-
-        name = pickleName;
-
+    // Checks to see if there is a monster
+    if (currentRoom.mob != null) {
+        currentMob = currentRoom.mob.name.toLowerCase();
     }
 
-    if (name == skeletonName || name == zombieName || name == lampName || name == pickleName) {
+    // This checks if the object literal called monster has a property name
+    // that matches the passed in name.
+    if (monster.hasOwnProperty(name)) {
 
-        if (currentMob != undefined || currentMob != null) {
+            // This changes the passed in name to match the name property of 
+            // both the lamp and pickle monsters.
+            if (name == "lamp") {
 
-            console.log(currentMob + " is found in current room");
+                name = lampName;
+
+            } else if (name == "pickle") {
+
+                name = pickleName;
+
+            }
+
+            console.log(currentMob + " is found in current room.");
 
             // Checks currentMob
             if (currentMob == skeletonName && name == currentMob) {
@@ -378,15 +384,9 @@ function monsterCheck(name) {
 
                 usrOutput.append(name + " is not found.")
 
+                return false;
+
             }
-
-
-        } else {
-
-            return false;
-
-        }
-
 
     } else {
 

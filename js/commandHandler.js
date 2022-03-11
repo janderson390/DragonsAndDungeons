@@ -83,8 +83,11 @@ function moveTo(request) {
                         currentRoom = eval(currentRoom[request]);
                         displayNewRoomInfo();
 
-                        reset("monster");
-    
+                        // By setting firstHit to true, it will trigger the combat
+                        // engine to reset the monster's health when moving into a
+                        // different room.
+                        firstHit = true;
+
                     } else {
                         usrOutput.append(blockade);
                     }
