@@ -24,13 +24,19 @@ let monster = {
         atk: 7,
         dex: 8,
         con: 50
+    },
+
+    finalBoss: {
+        name: "World Breaker Grumb",
+        atk: 700,
+        dex: 800,
+        con: 500
     }
     
 }
 
-
 class Monster {
-    constructor(monsterName) {
+    constructor(monserName) {
         this.monsterName = monster[monsterName].name;
         this.atk = monster[monsterName].atk;
         this.dex = monster[monsterName].dex;
