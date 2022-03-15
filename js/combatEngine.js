@@ -11,6 +11,7 @@ function combat(monster) {
     monsterName = GAME.monster.monsterName;
     monsterAtk = GAME.monster.atk;
     monsterDex = GAME.monster.dex;
+    monsterScore = GAME.monster.score;
 
 
     if (firstHit) {
@@ -91,6 +92,10 @@ function combat(monster) {
 
                             usrOutput.append("You landed a critical hit. " + monsterName + " is now dead.");
 
+                            totalScore += monsterScore;
+
+                            console.log("Score: " + totalScore);
+
                         } else {
 
                             usrOutput.append("You landed a critical hit. " + monsterName + " now has " + monsterHealth + " HP");
@@ -104,6 +109,10 @@ function combat(monster) {
                         if (monsterHealth < 0) {
 
                             usrOutput.append("You landed a hit. " + monsterName + " is now dead.");
+
+                            totalScore += monsterScore;
+
+                            console.log("Score: " + totalScore);
 
                         } else {
                             usrOutput.append("You landed a hit. " + monsterName + " now has " + monsterHealth + " HP");
@@ -185,7 +194,12 @@ function combat(monster) {
                         monsterHealth -= playerAtk;
 
                         if (monsterHealth < 0) {
+
                             usrOutput.append("You landed a critical hit. " + monsterName + " is dead.")
+
+                            totalScore += monsterScore;
+
+                            console.log("Score: " + totalScore);
 
                         } else {
 
@@ -198,7 +212,12 @@ function combat(monster) {
                         monsterHealth -= playerAtk;
 
                         if (monsterHealth < 0) {
+
                             usrOutput.append("You landed a hit. " + monsterName + " is dead.")
+
+                            totalScore += monsterScore;
+
+                            console.log("Score: " + totalScore);
 
                         } else {
 
@@ -222,6 +241,8 @@ function combat(monster) {
             usrInput.onkeydown = function () { return false };
 
             usrOutput.innerHTML = "";
+
+            totalScore = 0;
 
             insults();
 

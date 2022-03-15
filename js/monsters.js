@@ -20,7 +20,8 @@ let monster = {
         name: "Giant Sentient Lamp",
         atk: 3,
         dex: 1,
-        con: 50
+        con: 50,
+        score: 4
     },
     pickle: {
         name: "A pickle",
@@ -41,7 +42,7 @@ let monster = {
 }
 
 class Monster {
-    constructor(monserName) {
+    constructor(monsterName) {
         this.monsterName = monster[monsterName].name;
         this.atk = monster[monsterName].atk;
         this.dex = monster[monsterName].dex;

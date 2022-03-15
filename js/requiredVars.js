@@ -31,6 +31,7 @@ let classes = document.querySelectorAll(".formContainer input[type=\"radio\"]");
 let createBtn = document.querySelector("#submitCharacter");
 let divContainer = document.querySelector(".container");
 let playerHealth = document.querySelector(".charInfoHealth");
+let totalScore = 0;
 
 // MONSTER INFO
 let monsterName;
