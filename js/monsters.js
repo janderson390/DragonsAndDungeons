@@ -5,13 +5,16 @@ let monster = {
         name: "Skeleton",
         atk: 2,
         dex: 3,
-        con: 26
+        con: 26,
+        score: 2
+
     },
     zombie: {
         name: "Zombie",
         atk: 1,
         dex: 1,
-        con: 38
+        con: 38,
+        score: 1
     },
     lamp: {
         name: "Giant Sentient Lamp",
@@ -23,14 +26,16 @@ let monster = {
         name: "A pickle",
         atk: 7,
         dex: 8,
-        con: 50
+        con: 50,
+        score: 4
     },
 
     finalBoss: {
         name: "World Breaker Grumb",
         atk: 700,
         dex: 800,
-        con: 500
+        con: 500,
+        score: 200
     }
     
 }
