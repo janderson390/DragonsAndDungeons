@@ -248,25 +248,6 @@ function combat(monster) {
 
             reset("player");
 
-            // // Sets a timeout of 3 seconds
-            // setTimeout(function () {
-
-            //     usrOutput.innerHTML = "";
-
-            //     usrOutput.append("Resetting Game...");
-
-            //     // Sets another timeout of 3 seconds before calling reset function
-            //     setTimeout(function () {
-
-            //         reset("player");
-
-            //         // Re-enable text input
-            //         usrInput.disabled = false;
-
-            //     }, 3000)
-
-
-            // }, 3000)
 
         }
     }
@@ -286,7 +267,7 @@ function numGenFor(type, atk, dex) {
 
 
     if (type === "hitChance") {
-        numGen = (Math.floor(Math.random() * 2) + 1) % 2;
+        numGen = (Math.floor(Math.random() * 100) + 1) <= 75;
 
     } else if (type === "critChance") {
         numGen = (Math.round(Math.random() * 100) + 1) <= probability;
@@ -321,27 +302,32 @@ function reset(type) {
             setTimeout(function () {
 
                 usrOutput.innerHTML = "";
-        
+
                 usrOutput.append("Resetting Game...");
-        
+
                 // Sets another timeout of 3 seconds before calling reset function
                 setTimeout(function () {
-        
+
                     usrOutput.innerHTML = "";
-                    
+
                     currentRoom = startingCell;
-        
+
                     usrOutput.append("You enter " + currentRoom.description +
                         "\nYou see an item of interest: ");
-        
+
+                    for (let i = 0; i < currentRoom.inventory.items.length; i++) {
+                        usrOutput.append(document.createElement("br"));
+                        usrOutput.append(currentRoom.inventory.items[i].name);
+                    }
+
                     playerHealth.innerHTML = GAME.character.con;
-        
+
                     // Re-enable text input
                     usrInput.disabled = false;
-        
+
                 }, 3000)
-        
-        
+
+
             }, 3000)
 
             // monsterCon = GAME.monster.con;
@@ -524,7 +510,7 @@ function grumbsBane() {
         startInterval(grumbsFarewell, theFinalPiece);
 
     }, 2000)
-    
+
     function startInterval(msg, msg2) {
 
         grumbsMonologue = setInterval(function () {
@@ -549,7 +535,7 @@ function grumbsBane() {
 
                         if (ctr2 >= msg2.length) {
                             endInterval(theEndOfGrumb);
-                            setTimeout(function () {reset("player");}, 5500)
+                            setTimeout(function () { reset("player"); }, 5500)
                         }
 
                     }, 2800);
