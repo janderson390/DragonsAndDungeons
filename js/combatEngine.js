@@ -246,26 +246,6 @@ function combat(monster) {
 
             playerDeath();
 
-            // // Sets a timeout of 3 seconds
-            // setTimeout(function () {
-
-            //     usrOutput.innerHTML = "";
-
-            //     usrOutput.append("Resetting Game...");
-
-            //     // Sets another timeout of 3 seconds before calling reset function
-            //     setTimeout(function () {
-
-            //         reset("player");
-
-            //         // Re-enable text input
-            //         usrInput.disabled = false;
-
-            //     }, 3000)
-
-
-            // }, 3000)
-
         }
     }
 
