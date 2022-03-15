@@ -23,11 +23,11 @@ class Room {
 function generateRooms() {
 
     // FIRST FLOOR
-    startingCell = new Room("Starting Cell","a dust-covered cell, with skeletons all around. There seems to be a passage to the north out of this room.", "cavern", wall, wall, wall);
+    startingCell = new Room("Starting Cell","a dust-covered cell, with human remains all around. There seems to be a passage to the north out of this room.", "cavern", wall, wall, wall);
     startingCell.inventory.addItem(new Item(item.femurBone));
     startingCell.mob = monster.lamp;
 
-    cavern = new Room("Cavern", "an open cavern with markings all over the walls. It seems to encompase the room you started in. During your search, you find the north to be blocked. Where do you go?", blockade, "mine", "storage", "hallway", null);
+    cavern = new Room("Cavern", "an open cavern with markings all over the walls. It seems to encompase the room you started in. During your search, you find the north to be blocked as well as a wondering skeleton. Where do you go?", blockade, "mine", "storage", "hallway", null);
     cavern.inventory.addItem(new Consumable(consumable.apple));
     cavern.mob = monster.skeleton;
 
@@ -61,7 +61,7 @@ function generateRooms() {
     // add if we want plank
     //ibridge = new Room("Incomplete Bridge", "Marvelously engineered unfinished bridge. A plank would be able to make it to the other side", wall, wall, "throne", "kitchen")
     // add mobs
-    bridge = new Room("Bridge", "A stone bridge over the CAVERN, monsters block your path. WEST takes you back to the AROMRY, EAST lies the GREAT HALL.", wall, wall, "greatHall", "armory");
+    bridge = new Room("Bridge", "A stone bridge over the CAVERN, a zombie blocks your path. WEST takes you back to the AROMRY, EAST lies the GREAT HALL.", wall, wall, "greatHall", "armory");
     bridge.mob = monster.zombie;
     bridge.inventory.addItem(new Consumable(consumable.rottenFlesh));
     
@@ -74,7 +74,6 @@ function generateRooms() {
     tower = new Room("Great Tower", "A large tower where Lord Grumb commands his forces. Taking the stairs leads to a SOUTH facing opening reek with a foul stench.", wall, "lair", wall, wall, null);
 
     // THIRD FLOOR
-    lair = new Room("Lords Grumb's Lair", "As you come through the opening you gaze upon the source of the odor...", "tower", wall, wall, wall);
+    lair = new Room("Lords Grumb's Lair", "As you come through the opening, you gaze upon the source of the odor. Lord Grumb stands before you.", "tower", wall, wall, wall);
     lair.mob = monster.finalBoss;
-    
 }

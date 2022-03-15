@@ -32,10 +32,10 @@ let monster = {
     },
 
     finalBoss: {
-        name: "World Breaker Grumb",
+        name: "World Destroyer Grumb",
         atk: 700,
         dex: 800,
-        con: 500,
+        con: 1000,
         score: 200
     }
     
@@ -47,5 +47,6 @@ class Monster {
         this.atk = monster[monsterName].atk;
         this.dex = monster[monsterName].dex;
         this.con = monster[monsterName].con;
+        this.score = monster[monsterName].score;
     }
 }

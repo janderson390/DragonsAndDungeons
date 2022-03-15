@@ -34,9 +34,13 @@ function runCommand(command, request) {
         case "inspect":
             inspect(request);
             break;
-        
+
         case "attack":
             attack(request);
+            break;
+
+        case "throw":
+            throwObject(request);
             break;
 
         case "flee":
@@ -48,7 +52,7 @@ function runCommand(command, request) {
         case "look":
             observe();
             break;
-        
+
         case "search":
             search();
             break;
@@ -59,6 +63,11 @@ function runCommand(command, request) {
 
         case "clearoutput":
             clearOutput();
+            break;
+
+            // Note to Phillip: Please remember to delete this....
+        case "skip":
+            skip();
             break;
 
         default:
@@ -77,9 +86,9 @@ function moveTo(request) {
             if (currentRoom[request] != wall) {
 
                 if (currentRoom[request] != lockedDoor) {
-                    
+
                     if (currentRoom[request] != blockade) {
-    
+
                         currentRoom = eval(currentRoom[request]);
                         displayNewRoomInfo();
 
@@ -91,7 +100,7 @@ function moveTo(request) {
                     } else {
                         usrOutput.append(blockade);
                     }
-    
+
                 } else {
                     if (GAME.character.inventory.getItemFromName("rusty key") != null) {
                         usrOutput.append("You open the door with a key. ");
@@ -100,18 +109,18 @@ function moveTo(request) {
                     } else {
                         usrOutput.append(lockedDoor);
                     }
-                    
+
                 }
-    
+
             } else {
                 usrOutput.append(wall);
-            } 
+            }
             break;
-            
+
         default:
             displayError();
     }
-  
+
 
     // TODO: move locations
 }
@@ -154,7 +163,7 @@ function take(request) {
     } else {
         usrOutput.append("You couldn't find " + request + " in the room.");
     }
-    
+
 }
 
 function drop(request) {
@@ -182,7 +191,7 @@ function consume(request) {
         usrOutput.append("You didn't eat/drink anything.");
         return;
     }
-    
+
     let item = GAME.character.inventory.getItemFromName(request);
 
     if (item != null && item instanceof Consumable) {
@@ -190,7 +199,7 @@ function consume(request) {
 
         // Add effects
         playerHealth.innerHTML = Number(playerHealth.innerHTML) + item.effect;
-        
+
         // Display what happened
         let context = (item.type === foodType.Solid) ? "ate" : "drank";
         usrOutput.append("You " + context + " the " + request + ".");
@@ -233,6 +242,47 @@ function attack(request) {
 
     if (monsterCheck(request)) {
         combat(request);
+    }
+}
+
+function throwObject(request) {
+
+    if (request === "") {
+        usrOutput.append("You didn't throw anything.");
+        return;
+    }
+
+    let currentItem = GAME.character.inventory.getItemFromName(request);
+
+    if (currentItem != null) {
+
+        currentRoom.inventory.addItem(currentItem);
+
+        GAME.character.inventory.removeItem(request);
+
+        refreshInventoryDisplay();
+
+        let thyBane = consumable.deadSpider;
+
+        if(currentRoom.mob == monster.finalBoss && thyBane.name.toLowerCase() == request) {
+
+            usrOutput.append("You threw the " + request + " at " + currentRoom.mob.name);
+
+            usrOutput.append(document.createElement("br"));
+
+            grumbsBane();
+
+        } else {
+
+            usrOutput.append("You threw the " + request + ".");
+
+        }
+
+
+    } else {
+
+        usrOutput.append("You don't have " + request + " in your inventory.");
+
     }
 }
 
@@ -324,4 +374,16 @@ function displayError() {
 
 function updateScrolling() {
     outputDisplay.scrollTop = outputDisplay.scrollHeight;
+}
+
+function skip() {
+    currentRoom = lair;
+    usrOutput.innerHTML = "";
+    usrOutput.append(currentRoom.description);
+
+    item = consumable.deadSpider;
+
+    GAME.character.inventory.addItem(item);
+    refreshInventoryDisplay();
+
 }

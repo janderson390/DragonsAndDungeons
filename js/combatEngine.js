@@ -13,7 +13,6 @@ function combat(monster) {
     monsterDex = GAME.monster.dex;
     monsterScore = GAME.monster.score;
 
-
     if (firstHit) {
 
         firstHit = false;
@@ -238,7 +237,7 @@ function combat(monster) {
         } else { // Player is dead
 
             // Disable text input
-            usrInput.onkeydown = function () { return false };
+            usrInput.disabled = true;
 
             usrOutput.innerHTML = "";
 
@@ -259,7 +258,7 @@ function combat(monster) {
                     reset("player");
 
                     // Re-enable text input
-                    usrInput.onkeydown = function () { return true; };
+                    usrInput.disabled = false;
 
                 }, 3000)
 
@@ -310,31 +309,35 @@ function reset(type) {
         if (type == "monster") { // Monster is dead
 
             monsterCon = GAME.monster.con;
-    
+
         } else if (type == "player") { // Game over, player is dead
-    
+
             usrOutput.innerHTML = "";
-    
-            generateRooms();
-    
+
             currentRoom = startingCell;
-    
-            usrOutput.append("Starting Cell", "a dust-covered cell, with skeletons all around. There seems to be a passage to the north out of this room.");
-    
+
+            usrOutput.append("You enter " + currentRoom.description +
+                "\nYou see an item of interest: ");
+
+            for (let i = 0; i < currentRoom.inventory.items.length; i++) {
+                usrOutput.append(document.createElement("br"));
+                usrOutput.append(currentRoom.inventory.items[i].name);
+            }
+
             playerHealth.innerHTML = GAME.character.con;
-    
+
             monsterCon = GAME.monster.con;
-    
+
         }
     }
 
-   
+
 
 
 } // Last bracket for reset()
 
 
-// Lord Grumb's savage insults
+// Lord Grumb has graced us with his savage insults
 function insults() {
     let br = document.createElement("br");
 
@@ -359,55 +362,68 @@ function monsterCheck(name) {
     let zombieName = monster.zombie.name.toLowerCase();
     let lampName = monster.lamp.name.toLowerCase();
     let pickleName = monster.pickle.name.toLowerCase();
+    let grumbName = monster.finalBoss.name.toLowerCase();
     let currentMob;
 
     // Checks to see if there is a monster
     if (currentRoom.mob != null) {
         currentMob = currentRoom.mob.name.toLowerCase();
+    } else {
+        return false;
+    }
+
+    if (name == "grumb" || name == "lord grumb" || name == "world destroyer grumb") {
+
+        name = grumbName;
+
     }
 
     // This checks if the object literal called monster has a property name
     // that matches the passed in name.
     if (monster.hasOwnProperty(name)) {
 
-            // This changes the passed in name to match the name property of 
-            // both the lamp and pickle monsters.
-            if (name == "lamp") {
+        // This changes the passed in name to match the name property of 
+        // both the lamp and pickle monsters.
+        if (name == "lamp") {
 
-                name = lampName;
+            name = lampName;
 
-            } else if (name == "pickle") {
+        } else if (name == "pickle") {
 
-                name = pickleName;
+            name = pickleName;
 
-            }
+        }
 
-            console.log(currentMob + " is found in current room.");
+        console.log(currentMob + " is found in current room.");
 
-            // Checks currentMob
-            if (currentMob == skeletonName && name == currentMob) {
+        // Checks currentMob
+        if (currentMob == skeletonName && name == currentMob) {
 
-                return true;
+            return true;
 
-            } else if (currentMob == zombieName && name == currentMob) {
+        } else if (currentMob == zombieName && name == currentMob) {
 
-                return true;
+            return true;
 
-            } else if (currentMob == lampName && name == currentMob) {
+        } else if (currentMob == lampName && name == currentMob) {
 
-                return true;
+            return true;
 
-            } else if (currentMob == pickleName && name == currentMob) {
+        } else if (currentMob == pickleName && name == currentMob) {
 
-                return true;
+            return true;
 
-            } else {
+        } else if (currentMob == grumbName && name == currentMob) {
 
-                usrOutput.append(name + " is not found.")
+            return true;
 
-                return false;
+        } else {
 
-            }
+            usrOutput.append(name + " is not found.")
+
+            return false;
+
+        }
 
     } else {
 
@@ -418,3 +434,114 @@ function monsterCheck(name) {
     }
 
 } // Last bracket for monsterCheck()
+
+
+function grumbsBane() {
+
+    let grumb = monster.finalBoss;
+
+    grumb.con = 0;
+
+    totalScore += grumb.score;
+
+    usrInput.disabled = true;
+
+    let ctr = 0;
+
+    let ctr2 = 0;
+
+    let grumbsMonologue;
+
+    let theEndOfGrumb;
+
+    let grumbsFarewell = [
+        "\" You suck! ",
+        "What have you done to me! ",
+        "You are an incompetent fool! ",
+        "You disgrace, I spit on you! ",
+        "I pity your mother! You definately are a mistake! ",
+        "I refuse to be defeated by the likes of you! ",
+        "Do you know who I am! ",
+        "Do you know what I have done!",
+        "I have crushed the skulls of heroes!",
+        "I have buried your continents with bodies! ",
+        "I have caused eras to fall!",
+        "My steps cause earthquakes!",
+        "My roars make mountains crumble!",
+        "My breath strikes fear into the hearts of giants!",
+        "I am devastation!",
+        "I am desolation! ",
+        "I am decimation!",
+        "Not even death can save you from me!",
+        "I am Grumb! The FREAKING World Destroyer!",
+        "Know this, ",
+        "You atrocious, ",
+        "inferior, ",
+        "abomniable, ",
+        "defective, ",
+        "pathetic, ",
+        "weak, ",
+        "disgusting, ",
+        "deficient...\""
+    ];
+
+    let theFinalPiece = [
+        "Grumb stops his monologue midway. ",
+        "Silence fills the room.",
+        "You hesitate to move in fear of hearing more of \"The FREAKING World Destroyer\'s\" savagery.",
+        "Grumb gurgles, foam rises and drips from his mouth. ",
+        "He slowly stumbles backward and collapses to the floor."
+    ];
+
+    setTimeout(function () {
+        usrOutput.append("Grumb squeals at the sight of the spider.");
+
+        usrOutput.append(document.createElement("br"));
+
+        startInterval(grumbsFarewell, theFinalPiece);
+
+    }, 2000)
+    
+    function startInterval(msg, msg2) {
+
+        grumbsMonologue = setInterval(function () {
+            usrOutput.append(msg[ctr]);
+            usrOutput.append(document.createElement("br"));
+            updateScrolling();
+            ctr++;
+
+            if (ctr >= msg.length) {
+
+                console.log("inside if for interval");
+
+                endInterval(grumbsMonologue);
+
+                setTimeout(function () {
+
+                    theEndOfGrumb = setInterval(function () {
+                        usrOutput.append(msg2[ctr2]);
+                        usrOutput.append(document.createElement("br"));
+                        updateScrolling();
+                        ctr2++;
+
+                        if (ctr2 >= msg2.length) {
+                            endInterval(theEndOfGrumb);
+                            usrInput.disabled = false;
+                        }
+
+                    }, 2800);
+
+                }, 2850);
+
+            }
+
+        }, 2800);
+    }
+
+    function endInterval(end) {
+        clearInterval(end);
+    }
+
+    console.log("Score: " + totalScore);
+
+}
