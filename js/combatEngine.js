@@ -192,6 +192,10 @@ function combat(monster) {
 
                         monsterHealth -= playerAtk;
 
+                        if (playerHealth <= 0) {
+                            playerDeath();
+                        }
+
                         if (monsterHealth < 0) {
 
                             usrOutput.append("You landed a critical hit. " + monsterName + " is dead.")
@@ -216,6 +220,10 @@ function combat(monster) {
 
                             totalScore += monsterScore;
 
+                            if (playerHealth <= 0) {
+                                playerDeath();
+                            }
+
                             console.log("Score: " + totalScore);
 
                         } else {
@@ -236,27 +244,50 @@ function combat(monster) {
 
         } else { // Player is dead
 
-            // Disable text input
-            usrInput.disabled = true;
+            playerDeath();
 
-            usrOutput.innerHTML = "";
+            // // Sets a timeout of 3 seconds
+            // setTimeout(function () {
 
-            // Reset high score
-            characterHighScore.innerHTML = "High Score: "
-            populateDatabase(totalScore);
-            getHighScore();
+            //     usrOutput.innerHTML = "";
 
-            totalScore = 0;
+            //     usrOutput.append("Resetting Game...");
 
-            insults();
+            //     // Sets another timeout of 3 seconds before calling reset function
+            //     setTimeout(function () {
 
-            reset("player");
+            //         reset("player");
 
+            //         // Re-enable text input
+            //         usrInput.disabled = false;
+
+            //     }, 3000)
+
+
+            // }, 3000)
 
         }
     }
 
 } // Last bracket for combat()
+
+function playerDeath() {
+    // Disable text input
+    usrInput.disabled = true;
+
+    usrOutput.innerHTML = "";
+
+    // Reset high score
+    characterHighScore.innerHTML = "High Score: "
+    populateDatabase(totalScore);
+    getHighScore();
+
+    totalScore = 0;
+
+    insults();
+
+    reset("player");
+}
 
 
 // Generates numbers for Hit chance, Crit Chance and Crit Damage
@@ -271,7 +302,7 @@ function numGenFor(type, atk, dex) {
 
 
     if (type === "hitChance") {
-        numGen = (Math.floor(Math.random() * 100) + 1) <= 75;
+        numGen = (Math.floor(Math.random() * 2) + 1) % 2;
 
     } else if (type === "critChance") {
         numGen = (Math.round(Math.random() * 100) + 1) <= probability;
@@ -306,32 +337,27 @@ function reset(type) {
             setTimeout(function () {
 
                 usrOutput.innerHTML = "";
-
+        
                 usrOutput.append("Resetting Game...");
-
+        
                 // Sets another timeout of 3 seconds before calling reset function
                 setTimeout(function () {
-
+        
                     usrOutput.innerHTML = "";
-
+                    
                     currentRoom = startingCell;
-
+        
                     usrOutput.append("You enter " + currentRoom.description +
                         "\nYou see an item of interest: ");
-
-                    for (let i = 0; i < currentRoom.inventory.items.length; i++) {
-                        usrOutput.append(document.createElement("br"));
-                        usrOutput.append(currentRoom.inventory.items[i].name);
-                    }
-
+        
                     playerHealth.innerHTML = GAME.character.con;
-
+        
                     // Re-enable text input
                     usrInput.disabled = false;
-
+        
                 }, 3000)
-
-
+        
+        
             }, 3000)
 
             // monsterCon = GAME.monster.con;
@@ -514,7 +540,7 @@ function grumbsBane() {
         startInterval(grumbsFarewell, theFinalPiece);
 
     }, 2000)
-
+    
     function startInterval(msg, msg2) {
 
         grumbsMonologue = setInterval(function () {
@@ -539,7 +565,7 @@ function grumbsBane() {
 
                         if (ctr2 >= msg2.length) {
                             endInterval(theEndOfGrumb);
-                            setTimeout(function () { reset("player"); }, 5500)
+                            setTimeout(function () {reset("player");}, 5500)
                         }
 
                     }, 2800);
