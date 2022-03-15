@@ -9,6 +9,7 @@ function main() {
 function startGame() {
     // SETUP GAME (level/rooms, etc.)
     // Create rooms and set the starting room.
+    getHighScore();
     generateRooms();
     currentRoom = startingCell;
     displayNewRoomInfo();

@@ -241,10 +241,14 @@ function combat(monster) {
 
             usrOutput.innerHTML = "";
 
+            // Reset high score
+            characterHighScore.innerHTML = "High Score: "
+            populateDatabase(totalScore);
+            getHighScore();
+
             totalScore = 0;
 
             insults();
-
 
             reset("player");
 

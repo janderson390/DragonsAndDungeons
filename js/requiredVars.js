@@ -31,6 +31,7 @@ let classes = document.querySelectorAll(".formContainer input[type=\"radio\"]");
 let createBtn = document.querySelector("#submitCharacter");
 let divContainer = document.querySelector(".container");
 let playerHealth = document.querySelector(".charInfoHealth");
+let characterHighScore = document.querySelector('#score');
 let totalScore = 0;
 
 // MONSTER INFO
@@ -54,3 +55,6 @@ let firstHit = true;
 
 // OUTPUT DISPLAY
 let outputDisplay = document.querySelector(".displayBox")
+
+// Database
+let db = new Localbase('db');
