@@ -245,25 +245,28 @@ function combat(monster) {
 
             insults();
 
-            // Sets a timeout of 3 seconds
-            setTimeout(function () {
 
-                usrOutput.innerHTML = "";
+            reset("player");
 
-                usrOutput.append("Resetting Game...");
+            // // Sets a timeout of 3 seconds
+            // setTimeout(function () {
 
-                // Sets another timeout of 3 seconds before calling reset function
-                setTimeout(function () {
+            //     usrOutput.innerHTML = "";
 
-                    reset("player");
+            //     usrOutput.append("Resetting Game...");
 
-                    // Re-enable text input
-                    usrInput.disabled = false;
+            //     // Sets another timeout of 3 seconds before calling reset function
+            //     setTimeout(function () {
 
-                }, 3000)
+            //         reset("player");
+
+            //         // Re-enable text input
+            //         usrInput.disabled = false;
+
+            //     }, 3000)
 
 
-            }, 3000)
+            // }, 3000)
 
         }
     }
@@ -303,30 +306,45 @@ function reset(type) {
 
     firstHit = true;
 
+    totalScore = 0;
+
     console.clear();
 
     if (currentRoom.mob != null) {
+
         if (type == "monster") { // Monster is dead
 
             monsterCon = GAME.monster.con;
 
         } else if (type == "player") { // Game over, player is dead
 
-            usrOutput.innerHTML = "";
+            setTimeout(function () {
 
-            currentRoom = startingCell;
+                usrOutput.innerHTML = "";
+        
+                usrOutput.append("Resetting Game...");
+        
+                // Sets another timeout of 3 seconds before calling reset function
+                setTimeout(function () {
+        
+                    usrOutput.innerHTML = "";
+                    
+                    currentRoom = startingCell;
+        
+                    usrOutput.append("You enter " + currentRoom.description +
+                        "\nYou see an item of interest: ");
+        
+                    playerHealth.innerHTML = GAME.character.con;
+        
+                    // Re-enable text input
+                    usrInput.disabled = false;
+        
+                }, 3000)
+        
+        
+            }, 3000)
 
-            usrOutput.append("You enter " + currentRoom.description +
-                "\nYou see an item of interest: ");
-
-            for (let i = 0; i < currentRoom.inventory.items.length; i++) {
-                usrOutput.append(document.createElement("br"));
-                usrOutput.append(currentRoom.inventory.items[i].name);
-            }
-
-            playerHealth.innerHTML = GAME.character.con;
-
-            monsterCon = GAME.monster.con;
+            // monsterCon = GAME.monster.con;
 
         }
     }
@@ -482,7 +500,8 @@ function grumbsBane() {
         "pathetic, ",
         "weak, ",
         "disgusting, ",
-        "deficient...\""
+        "deficient...\"",
+        "..."
     ];
 
     let theFinalPiece = [
@@ -490,7 +509,11 @@ function grumbsBane() {
         "Silence fills the room.",
         "You hesitate to move in fear of hearing more of \"The FREAKING World Destroyer\'s\" savagery.",
         "Grumb gurgles, foam rises and drips from his mouth. ",
-        "He slowly stumbles backward and collapses to the floor."
+        "He slowly stumbles backward and collapses to the floor.",
+        "...",
+        "...",
+        "Congrats, you won!",
+        "You scored: " + totalScore
     ];
 
     setTimeout(function () {
@@ -526,7 +549,7 @@ function grumbsBane() {
 
                         if (ctr2 >= msg2.length) {
                             endInterval(theEndOfGrumb);
-                            usrInput.disabled = false;
+                            setTimeout(function () {reset("player");}, 5500)
                         }
 
                     }, 2800);
