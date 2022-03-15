@@ -61,14 +61,20 @@ function generateRooms() {
     // add if we want plank
     //ibridge = new Room("Incomplete Bridge", "Marvelously engineered unfinished bridge. A plank would be able to make it to the other side", wall, wall, "throne", "kitchen")
     // add mobs
-    bridge = new Room("Bridge", "A stone bridge over the CAVERN, monsters block your path. WEST takes you back to the AROMRY, EAST lies the GREAT HALL.", wall, wall, "greatHall", "armory", null);
-
+    bridge = new Room("Bridge", "A stone bridge over the CAVERN, monsters block your path. WEST takes you back to the AROMRY, EAST lies the GREAT HALL.", wall, wall, "greatHall", "armory");
+    bridge.mob = monster.zombie;
+    bridge.inventory.addItem(new Consumable(consumable.rottenFlesh));
+    
     greatHall = new Room("Great Hall", "A vast room spralls before you once holding grand feasts but no longer. The NORTH wall is broken giving a glimpse of the THRONE ROOM", "throne", wall, wall, "bridge", null);
-
-    throne = new Room("Throne Room", "Lord Grumb's desolate throne sits center as the focal point. A door can be seen NORTH of the throne.", "tower", "greatHall", wall, wall, null);
-
+    greatHall.inventory.addItem(new Consumable(consumable.apple));
+    
+    throne = new Room("Throne Room", "Lord Grumb's desolate throne sits center as the focal point. A door can be seen NORTH of the throne.", "tower", "greatHall", wall, wall);
+    throne.mob = monster.pickle;
+    
     tower = new Room("Great Tower", "A large tower where Lord Grumb commands his forces. Taking the stairs leads to a SOUTH facing opening reek with a foul stench.", wall, "lair", wall, wall, null);
 
     // THIRD FLOOR
-    lair = new Room("Lords Grumb's Lair", "As you come through the opening you gaze upon the source of the odor...", "tower", wall, wall, wall, null);
+    lair = new Room("Lords Grumb's Lair", "As you come through the opening you gaze upon the source of the odor...", "tower", wall, wall, wall);
+    lair.mob = monster.finalBoss;
+    
 }
