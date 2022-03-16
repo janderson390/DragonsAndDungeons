@@ -18,6 +18,10 @@ function getHighScore() {
             }
         }
 
-        characterHighScore.append(highScore);
+        setHighScore(highScore);
     })
+}
+
+function setHighScore(highScore) {
+    characterHighScore.append(highScore);
 }
