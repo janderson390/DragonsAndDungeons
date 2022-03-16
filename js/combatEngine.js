@@ -263,10 +263,7 @@ function playerDeath() {
     getHighScore();
 
     totalScore = 0;
-
-    GAME.character.inventory.items = [];
-    refreshInventoryDisplay();
-
+    
     generateRooms();
 
     insults();
@@ -302,7 +299,7 @@ function numGenFor(type, atk, dex) {
 } // Last bracket for numGenFor()
 
 
-// Resets monster's health
+// Resets Game
 function reset(type) {
 
     firstHit = true;
@@ -324,6 +321,10 @@ function reset(type) {
                 usrOutput.innerHTML = "";
         
                 usrOutput.append("Resetting Game...");
+
+                GAME.character.inventory.items = [];
+
+                refreshInventoryDisplay();
         
                 // Sets another timeout of 3 seconds before calling reset function
                 setTimeout(function () {
@@ -331,6 +332,10 @@ function reset(type) {
                     usrOutput.innerHTML = "";
                     
                     currentRoom = startingCell;
+
+                    // if (currentRoom.inventory == null) {
+                    //     resetRoom();
+                    // }
         
                     usrOutput.append("You enter " + currentRoom.description +
                         "\nYou see an item of interest: ");
@@ -360,6 +365,24 @@ function reset(type) {
 
 } // Last bracket for reset()
 
+// Reset Rooms
+function resetRoom() {
+
+    if (startingCell.inventory.item == null) {
+        startingCell.inventory.addItem(new Item(item.femurBone));
+    } else {
+        startingCell.inventory.removeItem(item.femurBone);
+        startingCell.inventory.addItem(new Item(item.femurBone));
+    }
+
+    cavern.inventory.addItem(new Consumable(consumable.apple));
+    mine.inventory.addItem(new Weapon(weapon.wornPickaxe));
+    cellar.inventory.addItem(new Consumable(consumable.deadSpider));
+    storage.inventory.addItem(new Item(questItem.rustyKey));
+    kitchen.inventory.addItem(new Consumable(consumable.apple));
+    bridge.inventory.addItem(new Consumable(consumable.rottenFlesh));
+    greatHall.inventory.addItem(new Consumable(consumable.apple));
+}
 
 // Lord Grumb has graced us with his savage insults
 function insults() {
@@ -492,7 +515,7 @@ function grumbsBane() {
         "I have caused eras to fall!",
         "My steps cause earthquakes!",
         "My roars make mountains crumble!",
-        "My breath strikes fear into the hearts of giants!",
+        "My very breath strikes fear into the hearts of giants!",
         "I am devastation!",
         "I am desolation! ",
         "I am decimation!",
@@ -523,6 +546,7 @@ function grumbsBane() {
     ];
 
     setTimeout(function () {
+        
         usrOutput.append("Grumb squeals at the sight of the spider.");
 
         usrOutput.append(document.createElement("br"));
@@ -534,9 +558,13 @@ function grumbsBane() {
     function startInterval(msg, msg2) {
 
         grumbsMonologue = setInterval(function () {
+
             usrOutput.append(msg[ctr]);
+
             usrOutput.append(document.createElement("br"));
+
             updateScrolling();
+
             ctr++;
 
             if (ctr >= msg.length) {
@@ -548,14 +576,20 @@ function grumbsBane() {
                 setTimeout(function () {
 
                     theEndOfGrumb = setInterval(function () {
+
                         usrOutput.append(msg2[ctr2]);
+
                         usrOutput.append(document.createElement("br"));
+
                         updateScrolling();
+
                         ctr2++;
 
                         if (ctr2 >= msg2.length) {
+
                             endInterval(theEndOfGrumb);
-                            setTimeout(function () {reset("player");}, 5500)
+
+                            setTimeout(function () { reset("player");}, 5500)
                         }
 
                     }, 2800);
