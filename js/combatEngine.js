@@ -258,11 +258,11 @@ function playerDeath() {
     usrOutput.innerHTML = "";
 
     // Reset high score
-    characterHighScore.innerHTML = "High Score: ";
-    populateDatabase(totalScore);
-    getHighScore();
+    // characterHighScore.innerHTML = "High Score: ";
+    // populateDatabase(totalScore);
+    // getHighScore();
 
-    totalScore = 0;
+    // totalScore = 0;
     
     generateRooms();
 
@@ -304,7 +304,11 @@ function reset(type) {
 
     firstHit = true;
 
-    totalScore = 0;
+    characterHighScore.innerHTML = "High Score: ";
+
+    populateDatabase(totalScore);
+    
+    getHighScore();
 
     console.clear();
 
@@ -333,9 +337,7 @@ function reset(type) {
                     
                     currentRoom = startingCell;
 
-                    // if (currentRoom.inventory == null) {
-                    //     resetRoom();
-                    // }
+                    totalScore = 0;
         
                     usrOutput.append("You enter " + currentRoom.description +
                         "\nYou see an item of interest: ");
@@ -364,25 +366,6 @@ function reset(type) {
 
 
 } // Last bracket for reset()
-
-// Reset Rooms
-function resetRoom() {
-
-    if (startingCell.inventory.item == null) {
-        startingCell.inventory.addItem(new Item(item.femurBone));
-    } else {
-        startingCell.inventory.removeItem(item.femurBone);
-        startingCell.inventory.addItem(new Item(item.femurBone));
-    }
-
-    cavern.inventory.addItem(new Consumable(consumable.apple));
-    mine.inventory.addItem(new Weapon(weapon.wornPickaxe));
-    cellar.inventory.addItem(new Consumable(consumable.deadSpider));
-    storage.inventory.addItem(new Item(questItem.rustyKey));
-    kitchen.inventory.addItem(new Consumable(consumable.apple));
-    bridge.inventory.addItem(new Consumable(consumable.rottenFlesh));
-    greatHall.inventory.addItem(new Consumable(consumable.apple));
-}
 
 // Lord Grumb has graced us with his savage insults
 function insults() {
@@ -589,7 +572,9 @@ function grumbsBane() {
 
                             endInterval(theEndOfGrumb);
 
-                            setTimeout(function () { reset("player");}, 5500)
+                            setTimeout(function () { 
+                                
+                                reset("player");}, 5500)
                         }
 
                     }, 2800);
