@@ -260,9 +260,14 @@ function playerDeath() {
     // Reset high score
     characterHighScore.innerHTML = "High Score: ";
     populateDatabase(totalScore);
-    setTimeout(getHighScore(), 3000);
+    getHighScore();
 
     totalScore = 0;
+
+    GAME.character.inventory.items = [];
+    refreshInventoryDisplay();
+
+    generateRooms();
 
     insults();
 
@@ -329,7 +334,12 @@ function reset(type) {
         
                     usrOutput.append("You enter " + currentRoom.description +
                         "\nYou see an item of interest: ");
-        
+
+                    for (let i = 0; i < currentRoom.inventory.items.length; i++) {
+                        usrOutput.append(document.createElement("br"));
+                        usrOutput.append(currentRoom.inventory.items[i].name);
+                    }
+
                     playerHealth.innerHTML = GAME.character.con;
         
                     // Re-enable text input
