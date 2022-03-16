@@ -258,7 +258,7 @@ function playerDeath() {
     usrOutput.innerHTML = "";
 
     // Reset high score
-    characterHighScore.innerHTML = "High Score: "
+    characterHighScore.innerHTML = "High Score: ";
     populateDatabase(totalScore);
     setTimeout(getHighScore(), 3000);
 
