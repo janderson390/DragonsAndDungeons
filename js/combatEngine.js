@@ -6,11 +6,20 @@ function combat(monster) {
 
     let br = document.createElement("br");
 
+    if (monster == "grumb" || monster == "lord grumb" || monster == "world destroyer grumb") {
+
+        monster = "finalBoss";
+
+    }
 
     GAME.monster = new Monster(monster);
+
     monsterName = GAME.monster.monsterName;
+
     monsterAtk = GAME.monster.atk;
+
     monsterDex = GAME.monster.dex;
+
     monsterScore = GAME.monster.score;
 
     if (firstHit) {
@@ -257,15 +266,6 @@ function playerDeath() {
 
     usrOutput.innerHTML = "";
 
-    // Reset high score
-    // characterHighScore.innerHTML = "High Score: ";
-    // populateDatabase(totalScore);
-    // getHighScore();
-
-    // totalScore = 0;
-    
-    generateRooms();
-
     insults();
 
     reset("player");
@@ -329,6 +329,10 @@ function reset(type) {
                 GAME.character.inventory.items = [];
 
                 refreshInventoryDisplay();
+
+                // repopulateItemsInRooms();
+
+                generateRooms();
         
                 // Sets another timeout of 3 seconds before calling reset function
                 setTimeout(function () {
@@ -395,6 +399,7 @@ function monsterCheck(name) {
     let grumbName = monster.finalBoss.name.toLowerCase();
     let currentMob;
 
+
     // Checks to see if there is a monster
     if (currentRoom.mob != null) {
         currentMob = currentRoom.mob.name.toLowerCase();
@@ -402,9 +407,10 @@ function monsterCheck(name) {
         return false;
     }
 
+
     if (name == "grumb" || name == "lord grumb" || name == "world destroyer grumb") {
 
-        name = grumbName;
+        name = "finalBoss";
 
     }
 
@@ -422,6 +428,10 @@ function monsterCheck(name) {
 
             name = pickleName;
 
+        } else if (name == "finalBoss") {
+
+            name = grumbName;
+            
         }
 
         console.log(currentMob + " is found in current room.");
@@ -456,6 +466,8 @@ function monsterCheck(name) {
         }
 
     } else {
+
+        console.log("Monster Check Outside if");
 
         usrOutput.append(name + " is not found.")
 

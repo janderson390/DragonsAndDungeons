@@ -1,5 +1,3 @@
-// This is temporary
-
 let monster = {
     skeleton: {
         name: "Skeleton",
